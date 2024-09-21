@@ -5,17 +5,23 @@ import { Card, Button, Form } from 'react-bootstrap';
 function AddTransactionForm() {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
-  const [date, setDate] = useState(''); // Add a state for the date
+  const [date, setDate] = useState('');
   const user = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!user || !user.id) {
+      alert('User not found. Please log in again.');
+      return;
+    }
+
     try {
       await axios.post('http://localhost:5000/api/transactions', {
-        userId: user._id,
+        userId: user.id,
         category,
-        amount: parseFloat(amount), // Ensure amount is a number
-        date, // Include the date in the request
+        amount: parseFloat(amount),
+        date,
       });
       alert('Transaction added successfully');
       setCategory('');
@@ -23,7 +29,7 @@ function AddTransactionForm() {
       setDate('');
     } catch (err) {
       console.error(err);
-      alert('Failed to add transaction');
+      alert(`Failed to add transaction: ${err.response?.data?.message || 'An error occurred'}`);
     }
   };
 

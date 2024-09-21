@@ -10,11 +10,11 @@ function Predictions() {
     if (user) {
       fetchPredictions();
     }
-  }, [user]);
+  }, []);
 
   const fetchPredictions = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/predictions/${user._id}`);
+      const res = await axios.get(`http://localhost:5000/api/predictions/${user.id}`);
       setPredictions(res.data);
     } catch (err) {
       console.error(err);

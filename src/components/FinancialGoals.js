@@ -12,11 +12,11 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
     if (user) {
       fetchGoals();
     }
-  }, [user]);
+  }, []);
 
   const fetchGoals = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/goals/${user._id}`);
+      const res = await axios.get(`http://localhost:5000/api/goals/${user.id}`);
       setGoals(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/goals', {
-        userId: user._id,
+        userId: user.id,
         goalType,
         targetAmount,
         deadline,
