@@ -1,34 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Card, Container, ListGroup, Button, Modal, Navbar, Nav, ToggleButtonGroup, ToggleButton, Row, Col, Form } from 'react-bootstrap';
-import AddTransactionForm from './AddTransactionForm';
-import FinancialGoals from './FinancialGoals';
-import { API_URL } from '../services/api';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  Container,
+  ListGroup,
+  Button,
+  Modal,
+  Navbar,
+  Nav,
+  ToggleButtonGroup,
+  ToggleButton,
+  Row,
+  Col,
+  Form,
+} from "react-bootstrap";
+import AddTransactionForm from "./AddTransactionForm";
+import FinancialGoals from "./FinancialGoals";
+import { API_URL } from "../services/api";
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentBalance, setCurrentBalance] = useState(0);
-  const [addMoneyAmount, setAddMoneyAmount] = useState('');
+  const [addMoneyAmount, setAddMoneyAmount] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [showAddMoneyModal, setShowAddMoneyModal] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (!user) {
-      navigate('/');
+      navigate("/");
       return;
-    } 
+    }
     fetchTransactions();
   }, []);
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(API_URL +  `/transactions/${user.id}`);
+      const res = await axios.get(API_URL + `/transactions/${user.id}`);
       setTransactions(res.data);
       calculateTotalAmount(res.data);
       calculateCurrentBalance(res.data);
@@ -38,13 +51,28 @@ function Dashboard() {
   };
 
   const calculateTotalAmount = (data) => {
-    const total = data.reduce((sum, transaction) => sum + transaction.amount, 0);
+    const total = data.reduce(
+      (sum, transaction) => sum + transaction.amount,
+      0
+    );
     setTotalAmount(total);
   };
 
+  const fetchCurrentBalance = async () => {
+    var userId = JSON.parse(window.localStorage.getItem("user")).id;
+    const response = await fetch(`${API_URL}/users/getBalance/${userId}`);
+    const data = await response.json();
+
+    setCurrentBalance(data.currentBalance);
+  };
+
   const calculateCurrentBalance = (data) => {
-    const totalIncome = data.filter(transaction => transaction.type === 'income').reduce((sum, transaction) => sum + transaction.amount, 0);
-    const totalExpenses = data.filter(transaction => transaction.type === 'expense').reduce((sum, transaction) => sum + transaction.amount, 0);
+    const totalIncome = data
+      .filter((transaction) => transaction.type === "income")
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
+    const totalExpenses = data
+      .filter((transaction) => transaction.type === "expense")
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
     const balance = totalIncome - totalExpenses;
     setCurrentBalance(balance);
   };
@@ -53,18 +81,49 @@ function Dashboard() {
   const handleAddMoneyModalClose = () => setShowAddMoneyModal(false);
 
   const handleThemeToggle = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
     document.body.className = newTheme;
   };
 
-  const handleAddMoney = () => {
+  useEffect(() => {
+    fetchCurrentBalance();
+  }, []);
+
+  const handleAddMoney = async () => {
     const amount = parseFloat(addMoneyAmount);
+
     if (!isNaN(amount) && amount > 0) {
-      setCurrentBalance(prev => prev + amount);
-      setAddMoneyAmount(''); // Clear input field
-      handleAddMoneyModalClose(); // Close modal after adding money
+      try {
+        const userId = JSON.parse(window.localStorage.getItem("user")).id;
+
+        const response = await fetch(`${API_URL}/users/updateBalance`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, amount }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Update the local balance if the server update was successful
+          setCurrentBalance(data.currentBalance);
+          setAddMoneyAmount(""); // Clear input field
+          handleAddMoneyModalClose(); // Close modal after adding money
+        } else {
+          // Handle error case (e.g., user not found or server error)
+          console.error(data.message);
+          alert("Error updating balance: " + data.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to update balance. Please try again.");
+      }
+    } else {
+      alert("Please enter a valid amount.");
     }
   };
 
@@ -76,13 +135,25 @@ function Dashboard() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
+            <Nav.Link href="/dashboard" className="mx-3">
+              Dashboard
+            </Nav.Link>
           </Nav>
           <Nav className="ml-auto d-flex align-items-center">
-            <Nav.Link href="/login" className="mx-3">Login</Nav.Link>
-            <ToggleButtonGroup type="radio" name="theme-toggle" className="ml-3">
-              <ToggleButton variant="outline-secondary" onClick={handleThemeToggle} value={theme}>
-                {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+            <Nav.Link href="/login" className="mx-3">
+              Login
+            </Nav.Link>
+            <ToggleButtonGroup
+              type="radio"
+              name="theme-toggle"
+              className="ml-3"
+            >
+              <ToggleButton
+                variant="outline-secondary"
+                onClick={handleThemeToggle}
+                value={theme}
+              >
+                {theme === "light" ? "Dark Mode" : "Light Mode"}
               </ToggleButton>
             </ToggleButtonGroup>
           </Nav>
@@ -98,8 +169,12 @@ function Dashboard() {
             <Card>
               <Card.Body>
                 <Card.Title>Current Balance</Card.Title>
-                <Card.Text className="display-4">${currentBalance.toFixed(2)}</Card.Text>
-                <Button variant="success" onClick={handleAddMoneyModalShow}>Add Money</Button>
+                <Card.Text className="display-4">
+                  ${currentBalance.toFixed(2)}
+                </Card.Text>
+                <Button variant="success" onClick={handleAddMoneyModalShow}>
+                  Add Money
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -107,8 +182,12 @@ function Dashboard() {
             <Card>
               <Card.Body>
                 <Card.Title>Total Amount Spent</Card.Title>
-                <Card.Text className="display-4">${totalAmount.toFixed(2)}</Card.Text>
-                <Button variant="primary" onClick={() => setShowModal(true)}>Add Transaction</Button>
+                <Card.Text className="display-4">
+                  ${totalAmount.toFixed(2)}
+                </Card.Text>
+                <Button variant="primary" onClick={() => setShowModal(true)}>
+                  Add Transaction
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -162,7 +241,9 @@ function Dashboard() {
             <Button variant="secondary" onClick={handleAddMoneyModalClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleAddMoney}>Add Money</Button>
+            <Button variant="primary" onClick={handleAddMoney}>
+              Add Money
+            </Button>
           </Modal.Footer>
         </Modal>
 
@@ -175,16 +256,15 @@ function Dashboard() {
           </Modal.Body>
         </Modal>
 
-
-
-        
-
         <Modal show={showGoalModal} onHide={() => setShowGoalModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Manage Financial Goals</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FinancialGoals user={user} onGoalAdded={() => setShowGoalModal(false)} />
+            <FinancialGoals
+              user={user}
+              onGoalAdded={() => setShowGoalModal(false)}
+            />
           </Modal.Body>
         </Modal>
       </Container>
