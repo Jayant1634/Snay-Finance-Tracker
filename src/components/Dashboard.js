@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Container, ListGroup, Button, Modal, Navbar, Nav, ToggleButtonGroup, ToggleButton, Row, Col, Form } from 'react-bootstrap';
 import AddTransactionForm from './AddTransactionForm';
 import FinancialGoals from './FinancialGoals';
+import { API_URL } from '../services/api';
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -27,7 +28,7 @@ function Dashboard() {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/transactions/${user.id}`);
+      const res = await axios.get(API_URL +  `/transactions/${user.id}`);
       setTransactions(res.data);
       calculateTotalAmount(res.data);
       calculateCurrentBalance(res.data);
@@ -173,6 +174,10 @@ function Dashboard() {
             <AddTransactionForm onClose={() => setShowModal(false)} />
           </Modal.Body>
         </Modal>
+
+
+
+        
 
         <Modal show={showGoalModal} onHide={() => setShowGoalModal(false)}>
           <Modal.Header closeButton>

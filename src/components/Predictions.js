@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, ListGroup, Container } from 'react-bootstrap';
+import { API_URL } from '../services/api';
 
 function Predictions() {
   const [predictions, setPredictions] = useState([]);
@@ -14,7 +15,7 @@ function Predictions() {
 
   const fetchPredictions = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/predictions/${user.id}`);
+      const res = await axios.get(API_URL +  `/predictions/${user.id}`);
       setPredictions(res.data);
     } catch (err) {
       console.error(err);

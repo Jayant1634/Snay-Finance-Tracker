@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Form, Button, ListGroup, Container } from 'react-bootstrap';
+import { API_URL } from '../services/api';
 
 function FinancialGoals({ user, displayOnly, onGoalAdded }) {
   const [goals, setGoals] = useState([]);
@@ -16,7 +17,7 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
 
   const fetchGoals = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/goals/${user.id}`);
+      const res = await axios.get(API_URL +  `/goals/${user.id}`);
       setGoals(res.data);
     } catch (err) {
       console.error(err);
@@ -26,7 +27,7 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
   const handleAddGoal = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/goals', {
+      await axios.post(API_URL +  '/goals', {
         userId: user.id,
         goalType,
         targetAmount,
