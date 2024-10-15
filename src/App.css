@@ -111,3 +111,39 @@
   width: 100%; /* Ensure the navbar takes full width */
 }
 
+
+/* Login.css */
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  font-weight: bold;
+  color: #333;
+}
+
+.login-box .form-control {
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.login-box .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.login-box .btn-link {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-box .btn-link:hover {
+  text-decoration: underline;
+}

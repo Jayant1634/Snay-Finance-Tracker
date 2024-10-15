@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Alert } from 'react-bootstrap'; // Import Bootstrap components
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'; // Import Bootstrap components
 import { API_URL } from '../services/api';
+import loginImage from '../images/login.png';  // Adjust the path according to your folder structure
+import './Login.css'; // Custom CSS for further styling
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -14,10 +16,8 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post(API_URL +  '/users/login', { username, password });
-      
+      const res = await axios.post(API_URL + '/users/login', { username, password });
       localStorage.setItem('user', JSON.stringify(res.data));
-
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
@@ -26,39 +26,54 @@ function Login() {
   };
 
   return (
-    <Container className="mt-5">
-      <h2 className="text-center">Login</h2>
-      {error && <Alert variant="danger">{error}</Alert>} {/* Bootstrap alert for errors */}
-      <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
-        <Form.Group controlId="formBasicUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            placeholder="Enter your username"
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="mt-3">
-          Login
-        </Button>
-        <div className="mt-3 text-center">
-          <Button variant="link" onClick={() => navigate('/register')}> {/* Button to navigate to Register page */}
-            New user? Register here
-          </Button>
-        </div>
-      </Form>
+    <Container fluid className="login-page">
+      <Row className="vh-100">
+        {/* Left side with image */}
+        <Col md={6} className="d-none d-md-block login-image">
+          {/* Replace the src with the path to your image */}
+          <img src={loginImage} alt="Login Visual" className="img-fluid" />
+        </Col>
+
+        {/* Right side with login form */}
+        <Col md={6} className="d-flex justify-content-center align-items-center">
+          <div className="login-box shadow-lg p-4 rounded bg-light">
+            <h2 className="text-center mb-4 text-primary">Login</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Enter your username"
+                  className="py-2"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword" className="mt-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Enter your password"
+                  className="py-2"
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" className="w-100 mt-4 py-2">
+                Login
+              </Button>
+              <div className="mt-3 text-center">
+                <Button variant="link" onClick={() => navigate('/register')}>
+                  New user? Register here
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 }

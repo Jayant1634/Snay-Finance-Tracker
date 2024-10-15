@@ -1,0 +1,60 @@
+/* Login.css */
+
+/* Full page background color */
+.login-page {
+    background-color: #f5f7fa;
+  }
+  
+  /* Login box styling */
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+  }
+  
+  /* Add some color to headings and form elements */
+  .login-box h2 {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .login-box .form-control {
+    font-size: 16px;
+    border-radius: 6px;
+    border-color: #007bff;
+  }
+  
+  /* Primary button color */
+  .login-box .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  .login-box .btn-link {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-box .btn-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Styling for the image */
+  .login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Add some padding on smaller devices */
+  @media (max-width: 768px) {
+    .login-box {
+      margin: 20px;
+    }
+  }
+  
