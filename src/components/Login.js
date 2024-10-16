@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'; // Import Bootstrap components
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { API_URL } from '../services/api';
-import loginImage from '../images/login.png';  // Adjust the path according to your folder structure
+import loginImage from '../images/login.png'; // Adjust the path according to your folder structure
 import './Login.css'; // Custom CSS for further styling
 
 function Login() {
@@ -21,7 +21,7 @@ function Login() {
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
-      setError('Invalid credentials');
+      setError('Invalid credentials');  
     }
   };
 
@@ -29,9 +29,10 @@ function Login() {
     <Container fluid className="login-page">
       <Row className="vh-100">
         {/* Left side with image */}
-        <Col md={6} className="d-none d-md-block login-image">
-          {/* Replace the src with the path to your image */}
-          <img src={loginImage} alt="Login Visual" className="img-fluid" />
+        <Col md={6} className="d-none d-md-block p-0">
+          <div className="login-image-container">
+            <img src={loginImage} alt="Login Visual" className="login-image" />
+          </div>
         </Col>
 
         {/* Right side with login form */}
@@ -68,6 +69,10 @@ function Login() {
               <div className="mt-3 text-center">
                 <Button variant="link" onClick={() => navigate('/register')}>
                   New user? Register here
+                </Button>
+                <br />
+                <Button variant="link" onClick={() => navigate('/forgot-password')}>
+                  Forgot Password?
                 </Button>
               </div>
             </Form>

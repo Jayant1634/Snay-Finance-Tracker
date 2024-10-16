@@ -1,9 +1,25 @@
 /* Register.css */
 
 .register-page {
-    background-color: #f5f7fa;
+    background-color: #f5f7fa; /* Light background */
   }
   
+  /* Image container styling */
+  .register-image-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .register-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire space without distorting */
+  }
+  
+  /* Register form styling */
   .register-box {
     width: 100%;
     max-width: 400px;
@@ -37,13 +53,6 @@
   
   .register-box .btn-link:hover {
     text-decoration: underline;
-  }
-  
-  /* Image styling */
-  .register-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
   
   /* Add some padding on smaller devices */

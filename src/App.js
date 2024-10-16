@@ -6,7 +6,9 @@ import FinancialGoals from './components/FinancialGoals';
 import Predictions from './components/Predictions';
 import Login from './components/Login';
 import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword'; import OtpVerification from './components/OtpVerification'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ResetPassword from './components/ResetPassword';
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route path="/goals" element={<FinancialGoals />} />
           <Route path="/predictions" element={<Predictions />} />
           <Route path="/login" element={<Login />} /> {/* Optional: Explicit login route */}
+          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* New Route */}
+          <Route path="/reset-password" element={<ResetPassword />} /> {/* New Route */}
+          <Route path="/otp-verification" element={<OtpVerification />} /> {/* Add OTP route */}
         </Routes>
       </div>
     </Router>

@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { API_URL } from '../services/api';
-import registerImage from '../images/register.jpg';  // Adjust the path according to your folder structure
+import registerImage from '../images/register.jpg'; // Adjust the path according to your folder structure
 import './Register.css'; // Custom CSS for further styling
 
 function Register() {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,14 +17,25 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Gmail validation
+    if (!email.endsWith('@gmail.com')) {
+      setError('Please use a Gmail address');
+      return;
+    }
+
     try {
+      // Step 1: Register the user and trigger OTP sending from the backend
       await axios.post(API_URL + '/users/register', {
         name,
+        email,
         username,
         password,
       });
-      alert('User registered successfully');
-      navigate('/login');
+
+      // Step 2: Redirect to the OTP verification page after registration
+      alert('User registered successfully. Please enter the OTP sent to your email.');
+      navigate('/otp-verification', { state: { email } }); // Pass the email as state
     } catch (err) {
       console.error(err);
       setError('Failed to register user');
@@ -34,8 +46,10 @@ function Register() {
     <Container fluid className="register-page">
       <Row className="vh-100">
         {/* Left side with image */}
-        <Col md={6} className="d-none d-md-block register-image">
-          <img src={registerImage} alt="Register Visual" className="img-fluid" />
+        <Col md={6} className="d-none d-md-block p-0">
+          <div className="register-image-container">
+            <img src={registerImage} alt="Register Visual" className="register-image" />
+          </div>
         </Col>
 
         {/* Right side with registration form */}
@@ -52,6 +66,17 @@ function Register() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   placeholder="Enter your name"
+                  className="py-2"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail" className="mt-3">
+                <Form.Label>Gmail</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Enter your Gmail address"
                   className="py-2"
                 />
               </Form.Group>
