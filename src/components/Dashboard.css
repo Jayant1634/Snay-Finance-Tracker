@@ -1,13 +1,67 @@
 /* General Styling for Light and Dark Modes */
+/* Background Color Animation */
+/* Background Color Animation */
+@keyframes backgroundColorChange {
+  0% {
+    background-color: #1c1c1e; /* Dark Color */
+  }
+  25% {
+    background-color: #2c3e50; /* Deep Blue */
+  }
+  50% {
+    background-color: #34495e; /* Soft Grey-Blue */
+  }
+  75% {
+    background-color: #1e272e; /* Darker Grey */
+  }
+  100% {
+    background-color: #1c1c1e; /* Return to Original Dark Color */
+  }
+}
+
+.dashboard {
+  animation: backgroundColorChange 20s infinite ease-in-out;
+  background-size: cover;
+  overflow: hidden;
+}
+
 body.light {
-  background-color: #f0f0f0;
-  color: #212529;
+  background: linear-gradient(135deg, #f0f0f0, #dfe4ea);
+  animation: backgroundCycleLight 10s infinite ease-in-out;
+  background-size: 200% 200%;
 }
 
 body.dark {
-  background-color: #1c1c1e;
-  color: #f8f9fa;
+  background: #1c1c1e;
+  animation: backgroundCycle 10s infinite ease-in-out;
 }
+
+/* Light Mode Background Animation */
+@keyframes backgroundCycleLight {
+  0% {
+    background-color: #f0f0f0; /* Light grey */
+  }
+  25% {
+    background-color: #a4b0be; /* Soft blue-grey */
+  }
+  50% {
+    background-color: #dfe4ea; /* Lightest grey */
+  }
+  75% {
+    background-color: #ced6e0; /* Soft blue */
+  }
+  100% {
+    background-color: #f0f0f0; /* Return to original light grey */
+  }
+}
+
+/* Dark Mode Gradient */
+body.dark {
+  background: linear-gradient(135deg, #1c1c1e, #2c3e50);
+  animation: backgroundCycle 10s infinite ease-in-out;
+  background-size: 200% 200%;
+}
+
 
 /* Card Styling */
 .card {
@@ -112,6 +166,17 @@ body.light .toggle-button-group .btn {
   transform: scale(1.05);
 }
 
+/* Styling for income and expense amounts */
+.amount-income {
+  color: green !important;
+  font-weight: bold;
+}
+
+.amount-expense {
+  color: red !important;
+  font-weight: bold;
+}
+
 /* List Group Styling */
 .list-group-item {
   background-color: transparent;
@@ -182,3 +247,254 @@ body.light .toggle-button-group .btn {
     padding: 8px 16px;
   }
 }
+/* General Floating Particles Animation */
+/* Smooth Floating Particles Animation */
+@keyframes drift1 {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(50px, -30px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50px, 30px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes drift2 {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-60px, 40px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(60px, -40px);
+    opacity: 0.8;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(54, 162, 235, 0.4);
+  box-shadow: 0 0 10px rgba(54, 162, 235, 0.4);
+  z-index: 0;
+  animation-duration: 12s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Different Colors for Particles */
+.particle-blue {
+  background-color: rgba(54, 162, 235, 0.4);
+  box-shadow: 0 0 10px rgba(54, 162, 235, 0.4);
+  animation-name: drift1;
+}
+
+.particle-pink {
+  background-color: rgba(255, 99, 132, 0.4);
+  box-shadow: 0 0 10px rgba(255, 99, 132, 0.4);
+  animation-name: drift2;
+}
+
+.particle-yellow {
+  background-color: rgba(255, 206, 86, 0.4);
+  box-shadow: 0 0 10px rgba(255, 206, 86, 0.4);
+  animation-name: drift1;
+}
+
+.particle-green {
+  background-color: rgba(75, 192, 192, 0.4);
+  box-shadow: 0 0 10px rgba(75, 192, 192, 0.4);
+  animation-name: drift2;
+}
+
+/* Different Sizes for Particles */
+.particle-small {
+  width: 8px;
+  height: 8px;
+}
+
+.particle-medium {
+  width: 12px;
+  height: 12px;
+}
+
+.particle-large {
+  width: 20px;
+  height: 20px;
+}
+
+/* Random Positions for 50 Particles */
+.particle-1 { top: 8%; left: 12%; }
+.particle-2 { top: 20%; left: 18%; }
+.particle-3 { top: 28%; left: 36%; }
+.particle-4 { top: 40%; left: 44%; }
+.particle-5 { top: 58%; left: 52%; }
+.particle-6 { top: 70%; left: 68%; }
+.particle-7 { top: 78%; left: 76%; }
+.particle-8 { top: 82%; left: 30%; }
+.particle-9 { top: 14%; left: 72%; }
+.particle-10 { top: 95%; left: 15%; }
+.particle-11 { top: 25%; left: 5%; }
+.particle-12 { top: 38%; left: 62%; }
+.particle-13 { top: 60%; left: 12%; }
+.particle-14 { top: 75%; left: 40%; }
+.particle-15 { top: 85%; left: 55%; }
+.particle-16 { top: 5%; left: 90%; }
+.particle-17 { top: 18%; left: 35%; }
+.particle-18 { top: 65%; left: 82%; }
+.particle-19 { top: 80%; left: 25%; }
+.particle-20 { top: 45%; left: 8%; }
+.particle-21 { top: 12%; left: 60%; }
+.particle-22 { top: 10%; left: 75%; }
+.particle-23 { top: 33%; left: 55%; }
+.particle-24 { top: 22%; left: 42%; }
+.particle-25 { top: 77%; left: 62%; }
+.particle-26 { top: 50%; left: 88%; }
+.particle-27 { top: 68%; left: 72%; }
+.particle-28 { top: 15%; left: 20%; }
+.particle-29 { top: 36%; left: 78%; }
+.particle-30 { top: 48%; left: 66%; }
+.particle-31 { top: 7%; left: 30%; }
+.particle-32 { top: 54%; left: 10%; }
+.particle-33 { top: 29%; left: 45%; }
+.particle-34 { top: 65%; left: 15%; }
+.particle-35 { top: 40%; left: 80%; }
+.particle-36 { top: 22%; left: 33%; }
+.particle-37 { top: 8%; left: 88%; }
+.particle-38 { top: 56%; left: 22%; }
+.particle-39 { top: 68%; left: 5%; }
+.particle-40 { top: 72%; left: 38%; }
+.particle-41 { top: 25%; left: 65%; }
+.particle-42 { top: 85%; left: 42%; }
+.particle-43 { top: 15%; left: 58%; }
+.particle-44 { top: 48%; left: 8%; }
+.particle-45 { top: 60%; left: 35%; }
+.particle-46 { top: 5%; left: 45%; }
+.particle-47 { top: 30%; left: 82%; }
+.particle-48 { top: 55%; left: 18%; }
+.particle-49 { top: 75%; left: 48%; }
+.particle-50 { top: 90%; left: 70%; }
+
+
+/* General Navbar Styling */
+.navbar {
+  background: rgba(25, 25, 25, 0.9); /* Dark background with slight transparency */
+  padding: 12px 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px); /* Glass effect */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+body.light .navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #36a2eb;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand:hover {
+  color: #1e90ff; /* Slightly brighter blue on hover */
+}
+
+/* Navbar Links */
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  flex: 1; /* Allow links to center-align */
+}
+
+.navbar-nav .nav-link {
+  color: #f0f0f0;
+  margin: 0 15px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light .navbar-nav .nav-link {
+  color: #212529; /* Dark text for light theme */
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(54, 162, 235, 0.15); /* Light background on hover */
+  color: #ffffff; /* White text for contrast */
+}
+
+/* Right Aligned Controls */
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spacing between components */
+}
+
+.navbar-controls .nav-link {
+  color: #f0f0f0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light .navbar-controls .nav-link {
+  color: #212529;
+}
+
+.navbar-controls .nav-link:hover {
+  background-color: rgba(54, 162, 235, 0.15);
+  color: #ffffff;
+}
+
+/* Toggle Button Styling */
+.toggle-button-group .btn {
+  border-radius: 20px;
+  padding: 5px 15px;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .toggle-button-group .btn {
+  background-color: #222;
+  color: #fff;
+}
+
+body.light .toggle-button-group .btn {
+  background-color: #fff;
+  color: #222;
+}
+
+.toggle-button-group .btn:hover {
+  background-color: #36a2eb;
+  color: #fff;
+}
+
+/* Navbar Hover Effects */
+.navbar-nav .nav-link,
+.navbar-controls .nav-link,
+.toggle-button-group .btn {
+  border-radius: 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-controls .nav-link:hover,
+.toggle-button-group .btn:hover {
+  background-color: rgba(54, 162, 235, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+

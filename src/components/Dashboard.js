@@ -41,6 +41,8 @@ function Dashboard() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const [particles, setParticles] = useState([]);
+
 
   useEffect(() => {
     if (!user) {
@@ -49,6 +51,26 @@ function Dashboard() {
     }
     fetchTransactions();
   }, [user]);
+
+  useEffect(() => {
+    const newParticles = Array.from({ length: 50 }, (_, index) => (
+      <div
+        key={index}
+        className={`particle particle-${
+          index + 1
+        } particle-${
+          ["small", "medium", "large"][
+            Math.floor(Math.random() * 3)
+          ]
+        } particle-${
+          ["blue", "pink", "yellow", "green"][
+            Math.floor(Math.random() * 4)
+          ]
+        }`}
+      />
+    ));
+    setParticles(newParticles);
+  }, []); // Empty dependency array ensures this runs only once
 
   const fetchTransactions = async () => {
     try {
@@ -172,36 +194,44 @@ function Dashboard() {
 
   return (
     <div className={theme}>
-      {/* Navbar */}
-      <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top">
-        <Navbar.Brand href="/dashboard">SnayExpTracker</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="/dashboard" className="mx-3">
-              Dashboard
-            </Nav.Link>
-          </Nav>
-          <Nav className="ml-auto d-flex align-items-center">
-            <Nav.Link href="/login" className="mx-3">
-              LogOut
-            </Nav.Link>
-            <ToggleButtonGroup
-              type="radio"
-              name="theme-toggle"
-              className="ml-3"
+    {/* Render Particles */}
+    {particles}
+
+    {/* Navbar */}
+    <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top enhanced-navbar">
+      <Navbar.Brand href="/dashboard" className="mx-3">
+        SnayExpTracker
+      </Navbar.Brand>
+      
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      
+      <Navbar.Collapse id="basic-navbar-nav">
+        {/* Centralized Navigation Links */}
+        <Nav className="navbar-nav">
+          <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
+          <Nav.Link href="/reports" className="mx-3">Reports</Nav.Link>
+          <Nav.Link href="/statistics" className="mx-3">Statistics</Nav.Link>
+        </Nav>
+        
+        {/* Right Aligned Controls */}
+        <div className="navbar-controls ml-auto">
+          <Nav.Link href="/login" className="mx-3">LogOut</Nav.Link>
+          <ToggleButtonGroup
+            type="radio"
+            name="theme-toggle"
+            className="ml-3"
+          >
+            <ToggleButton
+              variant="outline-secondary"
+              onClick={handleThemeToggle}
+              value={theme}
             >
-              <ToggleButton
-                variant="outline-secondary"
-                onClick={handleThemeToggle}
-                value={theme}
-              >
-                {theme === "light" ? "Dark Mode" : "Light Mode"}
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+              {theme === "light" ? "Dark Mode" : "Light Mode"}
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      </Navbar.Collapse>
+    </Navbar>
 
       <Container style={{ paddingTop: "80px" }}>
         <h2 className="my-4 text-center">Dashboard</h2>
@@ -256,21 +286,33 @@ function Dashboard() {
 
         {/* Recent Transactions List */}
         <Card className="mb-4">
-          <Card.Body>
-            <Card.Title>Recent Transactions</Card.Title>
-            {transactions.length > 0 ? (
-              <ListGroup>
-                {transactions.map((transaction) => (
-                  <ListGroup.Item key={transaction._id}>
-                    {transaction.category}: ${transaction.amount.toFixed(2)}
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            ) : (
-              <p>No recent transactions.</p>
-            )}
-          </Card.Body>
-        </Card>
+        <Card.Body>
+          <Card.Title>Recent Transactions</Card.Title>
+          {transactions.length > 0 ? (
+            <ListGroup>
+              {transactions.map((transaction) => (
+                <ListGroup.Item key={transaction._id}>
+                  {transaction.category}: 
+                  <span 
+                    className={
+                      transaction.type === "income" 
+                        ? "amount-income" 
+                        : "amount-expense"
+                    }
+                  >
+                    ${transaction.amount.toFixed(2)}
+                  </span>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          ) : (
+            <p>No recent transactions.</p>
+          )}
+        </Card.Body>
+      </Card>
+
+
+
 
         {/* Financial Goals */}
         <Card className="mb-4">
