@@ -9,13 +9,14 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword'; import OtpVerification from './components/OtpVerification'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResetPassword from './components/ResetPassword';
+import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Login />} /> {/* Login is accessible at root */}
+          <Route path="/" element={<LandingPage />} /> {/* Login is accessible at root */}
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-transaction" element={<AddTransactionForm />} />

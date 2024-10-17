@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { API_URL } from '../services/api'; // Adjust API_URL accordingly
-import forgotPasswordImage from '../images/forgot-password.jpg'; // Replace with your image path
-import './ForgotPassword.css'; // Import custom CSS for further styling
+import forgotPasswordImage from '../images/forgot-password.jpg'; // Use your uploaded image here
+import './ForgotPassword.css'; // Custom CSS for further styling
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -20,7 +20,6 @@ function ForgotPassword() {
       await axios.post(API_URL + '/users/forgot-password', { email });
       setMessage('If the email is registered, you will receive a password reset link.');
     } catch (err) {
-      // Handle different error cases based on backend responses
       if (err.response && err.response.status === 400) {
         setError(err.response.data.message || 'Error processing request. Please try again later.');
       } else {

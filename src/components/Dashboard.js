@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Pie } from "react-chartjs-2";
+import {
   Card,
   Container,
   ListGroup,
@@ -18,6 +25,10 @@ import {
 import AddTransactionForm from "./AddTransactionForm";
 import FinancialGoals from "./FinancialGoals";
 import { API_URL } from "../services/api";
+import "./Dashboard.css";
+
+// Register the required elements
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -37,35 +48,27 @@ function Dashboard() {
       return;
     }
     fetchTransactions();
-  }, []);
+  }, [user]);
 
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(API_URL + `/transactions/${user.id}`);
       setTransactions(res.data);
-      calculateTotalAmount(res.data);
-      calculateCurrentBalance(res.data);
+      calculateTotalAmount(res.data); // Now only calculates expenses
+      calculateCurrentBalance(res.data); // Balance remains income minus expenses
     } catch (err) {
       console.error(err);
     }
   };
-
+  
   const calculateTotalAmount = (data) => {
-    const total = data.reduce(
-      (sum, transaction) => sum + transaction.amount,
-      0
-    );
-    setTotalAmount(total);
+    const totalExpenses = data
+      .filter((transaction) => transaction.type === "expense")
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
+    setTotalAmount(totalExpenses);
   };
-
-  const fetchCurrentBalance = async () => {
-    var userId = JSON.parse(window.localStorage.getItem("user")).id;
-    const response = await fetch(`${API_URL}/users/getBalance/${userId}`);
-    const data = await response.json();
-
-    setCurrentBalance(data.currentBalance);
-  };
-
+  
+  
   const calculateCurrentBalance = (data) => {
     const totalIncome = data
       .filter((transaction) => transaction.type === "income")
@@ -87,10 +90,6 @@ function Dashboard() {
     document.body.className = newTheme;
   };
 
-  useEffect(() => {
-    fetchCurrentBalance();
-  }, []);
-
   const handleAddMoney = async () => {
     const amount = parseFloat(addMoneyAmount);
 
@@ -109,12 +108,10 @@ function Dashboard() {
         const data = await response.json();
 
         if (response.ok) {
-          // Update the local balance if the server update was successful
-          setCurrentBalance(data.currentBalance);
-          setAddMoneyAmount(""); // Clear input field
-          handleAddMoneyModalClose(); // Close modal after adding money
+          fetchTransactions(); // Refresh transactions after adding money
+          setAddMoneyAmount("");
+          handleAddMoneyModalClose();
         } else {
-          // Handle error case (e.g., user not found or server error)
           console.error(data.message);
           alert("Error updating balance: " + data.message);
         }
@@ -127,10 +124,56 @@ function Dashboard() {
     }
   };
 
+  const calculateExpensesByCategory = (data) => {
+    const categoryTotals = data
+      .filter((transaction) => transaction.type === "expense")
+      .reduce((totals, transaction) => {
+        const category = transaction.category;
+        if (!totals[category]) {
+          totals[category] = 0;
+        }
+        totals[category] += transaction.amount;
+        return totals;
+      }, {});
+  
+    return categoryTotals;
+  };
+  
+
+  // Data for Pie Chart
+  const overallPieData = {
+    labels: ["Expenses", "Balance"],
+    datasets: [
+      {
+        data: [totalAmount, currentBalance],
+        backgroundColor: ["#FF6384", "#36A2EB"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB"],
+      },
+    ],
+  };
+  
+  const categoryExpenses = calculateExpensesByCategory(transactions);
+  const categoryPieData = {
+    labels: Object.keys(categoryExpenses),
+    datasets: [
+      {
+        data: Object.values(categoryExpenses),
+        backgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+        ],
+        hoverBackgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+        ],
+      },
+    ],
+  };
+  
+
+
   return (
     <div className={theme}>
       {/* Navbar */}
-      <Navbar bg={theme} variant={theme} expand="lg" className="mb-4">
+      <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top">
         <Navbar.Brand href="/dashboard">SnayExpTracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -141,7 +184,7 @@ function Dashboard() {
           </Nav>
           <Nav className="ml-auto d-flex align-items-center">
             <Nav.Link href="/login" className="mx-3">
-              Login
+              LogOut
             </Nav.Link>
             <ToggleButtonGroup
               type="radio"
@@ -160,38 +203,56 @@ function Dashboard() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Container>
+      <Container style={{ paddingTop: "80px" }}>
         <h2 className="my-4 text-center">Dashboard</h2>
 
-        {/* Current Balance Card and Total Amount Spent Card */}
+        {/* Current Balance, Total Amount Spent & Pie Chart */}
         <Row className="mb-4">
-          <Col md={6}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Current Balance</Card.Title>
-                <Card.Text className="display-4">
-                  ${currentBalance.toFixed(2)}
-                </Card.Text>
-                <Button variant="success" onClick={handleAddMoneyModalShow}>
-                  Add Money
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Total Amount Spent</Card.Title>
-                <Card.Text className="display-4">
-                  ${totalAmount.toFixed(2)}
-                </Card.Text>
-                <Button variant="primary" onClick={() => setShowModal(true)}>
-                  Add Transaction
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        <Col md={4}>
+          <Row className="h-100">
+            <Col md={12} className="mb-4 d-flex flex-column justify-content-between">
+              <Card className="h-100 card">
+                <Card.Body>
+                  <Card.Title>Current Balance</Card.Title>
+                  <Card.Text className="display-4">
+                    ${currentBalance.toFixed(2)}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={12} className="d-flex flex-column justify-content-between">
+              <Card className="h-100 card">
+                <Card.Body>
+                  <Card.Title>Total Amount Spent</Card.Title>
+                  <Card.Text className="display-4">
+                    ${totalAmount.toFixed(2)}
+                  </Card.Text>
+                  <Button variant="primary" className="button" onClick={() => setShowModal(true)}>
+                    Add Transaction
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+        <Col md={4}>
+          <Card className="mb-4 h-100 pie-chart">
+            <Card.Body>
+              <Card.Title>Expenses vs. Balance</Card.Title>
+              <Pie data={overallPieData} />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="mb-4 h-100 pie-chart">
+            <Card.Body>
+              <Card.Title>Expenses by Category</Card.Title>
+              <Pie data={categoryPieData} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
 
         {/* Recent Transactions List */}
         <Card className="mb-4">
@@ -211,7 +272,7 @@ function Dashboard() {
           </Card.Body>
         </Card>
 
-        {/* Current Financial Goals Section */}
+        {/* Financial Goals */}
         <Card className="mb-4">
           <Card.Body>
             <Card.Title>Current Financial Goals</Card.Title>
@@ -223,29 +284,7 @@ function Dashboard() {
         </Card>
 
         {/* Modals */}
-        <Modal show={showAddMoneyModal} onHide={handleAddMoneyModalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Money</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Group controlId="addMoney">
-              <Form.Control
-                type="number"
-                placeholder="Amount to Add"
-                value={addMoneyAmount}
-                onChange={(e) => setAddMoneyAmount(e.target.value)}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleAddMoneyModalClose}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={handleAddMoney}>
-              Add Money
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        
 
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>

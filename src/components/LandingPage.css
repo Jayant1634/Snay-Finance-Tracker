@@ -1,0 +1,123 @@
+/* Full-page futuristic background with gradient */
+.landing-page-bg {
+    background: linear-gradient(135deg, #1f1f1f, #30336b, #6ab04c);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative; /* Ensure footer stays inside the container */
+  }
+  
+  /* Animation for the background gradient */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Transparent Navbar with animation */
+  .navbar-transparent {
+    background-color: rgba(0, 0, 0, 0.178); /* Black background with 60% opacity */
+    backdrop-filter: blur(10px); /* Optional: Glass-like blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.038); /* Optional border */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  /* Footer for the credits at the bottom right */
+  .footer-credits {
+    position: absolute;
+    bottom: 10px; /* Push it slightly up from the bottom */
+    right: 20px; /* Push it slightly left from the right */
+    text-align: right;
+    color: white;
+    font-size: 14px;
+    opacity: 0.8; /* Make it slightly transparent */
+  }
+  
+  .footer-credits p {
+    margin: 0;
+  }
+  
+  /* Ensure navbar text is white */
+  .navbar-transparent .navbar-brand,
+  .navbar-transparent .nav-link {
+    color: white !important; /* Force white color for text */
+  }
+  
+  .navbar-transparent .nav-link:hover {
+    color: #f8f9fa !important; /* Slightly lighter on hover */
+  }
+  
+  /* Futuristic button with hover effect */
+  .futuristic-button {
+    background-color: #3a7bd5;
+    background-image: linear-gradient(45deg, #3a7bd5, #00d2ff);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .futuristic-button:hover {
+    background-image: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    transform: translateY(-5px);
+  }
+  
+  /* Arrow container */
+  .arrow-container {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Start near the left */
+    transform: translateY(-50%);
+  }
+  
+  /* Arrows starting from the left and moving to the right */
+  .arrow {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 20px solid white; /* Arrow pointing right */
+    position: absolute;
+    animation: arrowMove 1.5s infinite;
+  }
+  
+  /* Arrow positions and delays for animation */
+  .arrow-1 {
+    top: -30px;
+    animation-delay: 0s;
+  }
+  
+  .arrow-2 {
+    top: 0;
+    animation-delay: 0.3s;
+  }
+  
+  .arrow-3 {
+    top: 30px;
+    animation-delay: 0.6s;
+  }
+  
+  /* Arrow movement animation */
+  @keyframes arrowMove {
+    0% {
+      transform: translateX(0); /* Start from the left */
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(300px); /* Move toward the right */
+      opacity: 0;
+    }
+  }
+  
