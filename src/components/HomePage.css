@@ -1,0 +1,100 @@
+/* General Styling for HomePage */
+.home-page {
+    padding: 40px;
+    background: linear-gradient(135deg, #f0f0f5, #dfe4ea, #f8f9fa);
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-size: 400% 400%;
+    animation: smoothBgShift 20s ease infinite;
+}
+
+/* Background Animation */
+@keyframes smoothBgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main Content Padding */
+.main-content {
+    background-color: #3a3a3a00;
+    padding-top: 100px; 
+}
+
+/* Animated Text */
+.animated-text {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #3a3a3a;
+    animation: fadeInGlow 4s ease-in-out;
+}
+
+@keyframes fadeInGlow {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Feature Cards */
+.futuristic-card {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+}
+
+.futuristic-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Feature Icons */
+.feature-icon {
+    font-size: 2.5rem;
+    color: #1e90ff;
+    margin-bottom: 15px;
+}
+
+/* Button Styling */
+.futuristic-button {
+    background-color: #1e90ff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.futuristic-button:hover {
+    background-color: #1c87e0;
+    transform: translateY(-3px);
+}
+
+/* Navbar */
+.enhanced-navbar {
+    background-color: rgba(25, 25, 25, 0.85);
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 60px;
+    z-index: 1000;
+}
+
+body.light .enhanced-navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth Button Hover Effect */
+.futuristic-button {
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.futuristic-button:hover {
+    background: linear-gradient(135deg, #36a2eb, #1e90ff);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(54, 162, 235, 0.7);
+}

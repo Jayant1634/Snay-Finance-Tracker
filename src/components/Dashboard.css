@@ -1,5 +1,7 @@
-/* General Styling for Light and Dark Modes */
-/* Background Color Animation */
+/* ================================ */
+/* 1. General Styling for Light and Dark Modes */
+/* ================================ */
+
 /* Background Color Animation */
 @keyframes backgroundColorChange {
   0% {
@@ -32,8 +34,9 @@ body.light {
 }
 
 body.dark {
-  background: #1c1c1e;
+  background: linear-gradient(135deg, #1c1c1e, #2c3e50);
   animation: backgroundCycle 10s infinite ease-in-out;
+  background-size: 200% 200%;
 }
 
 /* Light Mode Background Animation */
@@ -55,13 +58,10 @@ body.dark {
   }
 }
 
-/* Dark Mode Gradient */
-body.dark {
-  background: linear-gradient(135deg, #1c1c1e, #2c3e50);
-  animation: backgroundCycle 10s infinite ease-in-out;
-  background-size: 200% 200%;
-}
 
+/* ================================ */
+/* 2. Card Styling */
+/* ================================ */
 
 /* Card Styling */
 .card {
@@ -82,13 +82,18 @@ body.dark .card {
   box-shadow: 0 8px 30px rgba(0, 162, 255, 0.6);
 }
 
+
+/* ================================ */
+/* 3. Button Styling */
+/* ================================ */
+
 /* Button Styling */
 .button {
   border-radius: 50px;
   padding: 10px 20px;
   background-color: #36a2eb;
   border: none;
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -98,31 +103,92 @@ body.dark .card {
   transform: translateY(-3px); /* Slight lift on hover */
 }
 
-/* Navbar Styling */
-.navbar {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background: rgba(0, 0, 0, 0.8);
-  animation: fadeInDown 0.8s ease forwards;
+
+/* ================================ */
+/* 4. Navbar Styling */
+/* ================================ */
+
+/* General Navbar Styling */
+/* General Navbar Styling */
+.enhanced-navbar {
+  background: rgba(25, 25, 25, 0.9); /* Dark background with slight transparency */
+  padding: 12px 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px); /* Glass effect */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  z-index: 999; /* Ensure it stays on top */
 }
 
-body.light .navbar {
-  background-color: rgba(255, 255, 255, 0.8);
+body.light .enhanced-navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
+/* Navbar Brand */
+.enhanced-navbar .navbar-brand {
   font-weight: bold;
   font-size: 1.8rem;
   color: #36a2eb;
-}
-
-.nav-link {
-  color: inherit;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.nav-link:hover {
-  color: #36a2eb;
+.enhanced-navbar .navbar-brand:hover {
+  color: #1e90ff; /* Slightly brighter blue on hover */
 }
+
+/* Navbar Links */
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  flex: 1; /* Allow links to center-align */
+  align-items: center;
+}
+
+.navbar-nav .nav-link {
+  color: #000000; /* Light color for dark mode */
+  margin: 0 15px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light .navbar-nav .nav-link {
+  color: #212529; /* Dark text for light theme */
+}
+
+/* Right Aligned Controls */
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; /* Push to the right side */
+}
+
+/* Toggle Button Group */
+.toggle-button-group .btn {
+  border-radius: 20px;
+  padding: 5px 15px;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Media Query for Better Mobile View */
+@media (max-width: 768px) {
+  .navbar-nav {
+    justify-content: flex-start;
+  }
+  .navbar-controls {
+    justify-content: flex-end;
+  }
+}
+
+/* ================================ */
+/* 5. Toggle Button Group Styling */
+/* ================================ */
 
 /* Toggle Button Group Styling */
 .toggle-button-group {
@@ -137,6 +203,7 @@ body.light .navbar {
   background-color: transparent;
   border: 1px solid currentColor;
   color: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark .toggle-button-group .btn {
@@ -148,6 +215,16 @@ body.light .toggle-button-group .btn {
   background-color: #fff;
   color: #222;
 }
+
+.toggle-button-group .btn:hover {
+  background-color: #36a2eb;
+  color: #000000;
+}
+
+
+/* ================================ */
+/* 6. Pie Chart Styling */
+/* ================================ */
 
 /* Pie Chart Styling */
 .pie-chart {
@@ -166,6 +243,11 @@ body.light .toggle-button-group .btn {
   transform: scale(1.05);
 }
 
+
+/* ================================ */
+/* 7. Amount Styling */
+/* ================================ */
+
 /* Styling for income and expense amounts */
 .amount-income {
   color: green !important;
@@ -176,6 +258,11 @@ body.light .toggle-button-group .btn {
   color: red !important;
   font-weight: bold;
 }
+
+
+/* ================================ */
+/* 8. List Group Styling */
+/* ================================ */
 
 /* List Group Styling */
 .list-group-item {
@@ -189,6 +276,11 @@ body.light .toggle-button-group .btn {
 .list-group-item:hover {
   background-color: rgba(0, 123, 255, 0.1);
 }
+
+
+/* ================================ */
+/* 9. Animations */
+/* ================================ */
 
 /* Animations */
 @keyframes fadeIn {
@@ -232,22 +324,11 @@ body.light .toggle-button-group .btn {
     opacity: 1;
   }
 }
+  
+/* ================================ */
+/* 10. Floating Particles Animation */
+/* ================================ */
 
-/* Media Queries for Responsive Design */
-@media (max-width: 576px) {
-  .card-text {
-    font-size: 1.8rem;
-  }
-
-  .navbar-brand {
-    font-size: 1.4rem;
-  }
-
-  .button {
-    padding: 8px 16px;
-  }
-}
-/* General Floating Particles Animation */
 /* Smooth Floating Particles Animation */
 @keyframes drift1 {
   0% {
@@ -357,144 +438,70 @@ body.light .toggle-button-group .btn {
 .particle-23 { top: 33%; left: 55%; }
 .particle-24 { top: 22%; left: 42%; }
 .particle-25 { top: 77%; left: 62%; }
-.particle-26 { top: 50%; left: 88%; }
-.particle-27 { top: 68%; left: 72%; }
-.particle-28 { top: 15%; left: 20%; }
-.particle-29 { top: 36%; left: 78%; }
-.particle-30 { top: 48%; left: 66%; }
-.particle-31 { top: 7%; left: 30%; }
-.particle-32 { top: 54%; left: 10%; }
-.particle-33 { top: 29%; left: 45%; }
-.particle-34 { top: 65%; left: 15%; }
-.particle-35 { top: 40%; left: 80%; }
-.particle-36 { top: 22%; left: 33%; }
-.particle-37 { top: 8%; left: 88%; }
-.particle-38 { top: 56%; left: 22%; }
-.particle-39 { top: 68%; left: 5%; }
-.particle-40 { top: 72%; left: 38%; }
-.particle-41 { top: 25%; left: 65%; }
-.particle-42 { top: 85%; left: 42%; }
-.particle-43 { top: 15%; left: 58%; }
-.particle-44 { top: 48%; left: 8%; }
-.particle-45 { top: 60%; left: 35%; }
-.particle-46 { top: 5%; left: 45%; }
-.particle-47 { top: 30%; left: 82%; }
-.particle-48 { top: 55%; left: 18%; }
-.particle-49 { top: 75%; left: 48%; }
-.particle-50 { top: 90%; left: 70%; }
 
 
-/* General Navbar Styling */
-.navbar {
-  background: rgba(25, 25, 25, 0.9); /* Dark background with slight transparency */
-  padding: 12px 20px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(10px); /* Glass effect */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+
+/* ================================ */
+/* 7. Animations */
+/* ================================ */
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-body.light .navbar {
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Navbar Brand */
-.navbar-brand {
-  font-weight: bold;
-  font-size: 1.6rem;
-  color: #36a2eb;
-  transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.navbar-brand:hover {
-  color: #1e90ff; /* Slightly brighter blue on hover */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
+  
+/* ================================ */
+/* 8. Media Queries for Responsive Design */
+/* ================================ */
 
-/* Navbar Links */
-.navbar-nav {
-  display: flex;
-  justify-content: center;
-  flex: 1; /* Allow links to center-align */
+@media (max-width: 576px) {
+  .card-text {
+    font-size: 1.8rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  .button {
+    padding: 8px 16px;
+  }
 }
-
-.navbar-nav .nav-link {
-  color: #f0f0f0;
-  margin: 0 15px;
-  padding: 5px 15px;
-  border-radius: 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.light .navbar-nav .nav-link {
-  color: #212529; /* Dark text for light theme */
-}
-
-.navbar-nav .nav-link:hover {
-  background-color: rgba(54, 162, 235, 0.15); /* Light background on hover */
-  color: #ffffff; /* White text for contrast */
-}
-
-/* Right Aligned Controls */
-.navbar-controls {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Spacing between components */
-}
-
-.navbar-controls .nav-link {
-  color: #f0f0f0;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.light .navbar-controls .nav-link {
-  color: #212529;
-}
-
-.navbar-controls .nav-link:hover {
-  background-color: rgba(54, 162, 235, 0.15);
-  color: #ffffff;
-}
-
-/* Toggle Button Styling */
-.toggle-button-group .btn {
-  border-radius: 20px;
-  padding: 5px 15px;
-  background-color: transparent;
-  border: 1px solid currentColor;
-  color: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .toggle-button-group .btn {
-  background-color: #222;
-  color: #fff;
-}
-
-body.light .toggle-button-group .btn {
-  background-color: #fff;
-  color: #222;
-}
-
-.toggle-button-group .btn:hover {
-  background-color: #36a2eb;
-  color: #fff;
-}
-
-/* Navbar Hover Effects */
-.navbar-nav .nav-link,
-.navbar-controls .nav-link,
-.toggle-button-group .btn {
-  border-radius: 20px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-controls .nav-link:hover,
-.toggle-button-group .btn:hover {
-  background-color: rgba(54, 162, 235, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-

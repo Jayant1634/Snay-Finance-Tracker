@@ -1,0 +1,160 @@
+/* ================================ */
+/* General Light and Dark Modes */
+/* ================================ */
+
+body.light .transactions-page {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  
+  body.dark .transactions-page {
+    background-color: #1c1c1e;
+    color: #f0f0f0;
+  }
+  
+  /* Navbar Styling */
+  .transactions-page .navbar {
+    background: rgba(25, 25, 25, 0.9);
+    padding: 12px 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+  
+  body.light .transactions-page .navbar {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Navbar Links */
+  .transactions-page .navbar .nav-link {
+    color: #000000;
+    margin: 0 15px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.light .transactions-page .navbar .nav-link {
+    color: #212529;
+  }
+  
+  /* Navbar Brand */
+  .transactions-page .navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #36a2eb;
+    transition: color 0.3s ease;
+  }
+  
+  .transactions-page .navbar-brand:hover {
+    color: #1e90ff;
+  }
+  
+  /* Search Bar Styling */
+  .transactions-page .form-control {
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #ced4da;
+  }
+  
+  body.dark .transactions-page .form-control {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+  
+  body.light .transactions-page .form-control {
+    background-color: #fff;
+    color: #212529;
+    border: 1px solid #ced4da;
+  }
+  
+  /* Button Styling */
+  .transactions-page .btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .transactions-page .btn-outline-success {
+    color: #28a745;
+  }
+  
+  .transactions-page .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  /* Toggle Button Group */
+  .transactions-page .toggle-button-group .btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Table Styling */
+  .transactions-container .table {
+    margin-top: 20px;
+  }
+  
+  .transactions-container .table th,
+  .transactions-container .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  body.dark .transactions-container .table {
+    background-color: #2c2c2e;
+    color: #f0f0f0;
+  }
+  
+  body.light .transactions-container .table {
+    background-color: #fff;
+    color: #212529;
+  }
+  
+  /* Pagination Styling */
+  .transactions-page .pagination .page-link {
+    color: #36a2eb;
+    border-radius: 50%;
+    padding: 5px 12px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .transactions-page .pagination .page-item.active .page-link {
+    background-color: #36a2eb;
+    border-color: #36a2eb;
+    color: #fff;
+  }
+  
+  .transactions-page .pagination .page-link:hover {
+    background-color: rgba(54, 162, 235, 0.15);
+    color: #36a2eb;
+  }
+  
+  /* Media Query for Responsive Adjustments */
+  @media (max-width: 576px) {
+    .transactions-page .navbar-brand {
+      font-size: 1.4rem;
+    }
+  
+    .transactions-page .form-control {
+      padding: 8px 10px;
+    }
+  
+    .transactions-page .table th,
+    .transactions-page .table td {
+      font-size: 0.9rem;
+    }
+  }
+  

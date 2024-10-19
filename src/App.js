@@ -10,6 +10,8 @@ import ForgotPassword from './components/ForgotPassword'; import OtpVerification
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResetPassword from './components/ResetPassword';
 import LandingPage from './components/LandingPage';
+import Transactions from './components/Transactions';
+import HomePage from './components/HomePage';
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} /> {/* New Route */}
           <Route path="/reset-password" element={<ResetPassword />} /> {/* New Route */}
           <Route path="/otp-verification" element={<OtpVerification />} /> {/* Add OTP route */}
+          <Route path="/transactions" element={<Transactions/>} />          
+          <Route path="/home" element={<HomePage />} />
+
         </Routes>
       </div>
     </Router>

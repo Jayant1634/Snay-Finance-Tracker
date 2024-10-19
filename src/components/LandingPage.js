@@ -7,20 +7,36 @@ function LandingPage() {
   const navigate = useNavigate();
 
   // Function to handle redirecting to the login page
-  const redirectToLogin = () => {
+  const redirectToSignup = () => {
+    navigate('/register'); // Redirect to login page
+  };
+  const redirectToLogin= () => {
     navigate('/login'); // Redirect to login page
   };
 
   return (
     <div className="landing-page-bg">
-      {/* Animated Transparent Navbar */}
+     {/* Animated Transparent Navbar */}
       <Navbar expand="lg" className="navbar-transparent navbar-fixed-top animated-navbar">
         <Container>
-          <Navbar.Brand href="#" className="text-white">Snay Expense Tracker</Navbar.Brand>
+          {/* Brand aligned to the left */}
+          <Navbar.Brand href="#" className="text-white">
+            Snay Expense Tracker
+          </Navbar.Brand>
+
+          {/* Navbar toggle button for mobile view */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          {/* Navbar items and alignment */}
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <Button variant="outline-light" onClick={redirectToLogin}>Login</Button>
+            <Nav className="ms-auto align-items-center">
+              {/* Empty Nav to push login button to the far right */}
+            </Nav>
+            {/* Log In button aligned to the far right */}
+            <Nav>
+              <Button variant="outline-light" className="mx-2" onClick={redirectToLogin}>
+                Log In
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -48,8 +64,8 @@ function LandingPage() {
 
           {/* Right column with the button */}
           <Col md={4} className="d-flex align-items-center justify-content-center">
-            <Button onClick={redirectToLogin} variant="primary" className="mt-3 futuristic-button">
-              Go to Login
+            <Button onClick={redirectToSignup} variant="primary" className="mt-3 futuristic-button">
+              Sign Up
             </Button>
           </Col>
         </Row>

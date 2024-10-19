@@ -20,9 +20,9 @@ import {
   ToggleButton,
   Row,
   Col,
-  Form,
 } from "react-bootstrap";
 import AddTransactionForm from "./AddTransactionForm";
+import { FaSun, FaMoon } from "react-icons/fa"; // Import sun and moon icons
 import FinancialGoals from "./FinancialGoals";
 import { API_URL } from "../services/api";
 import "./Dashboard.css";
@@ -53,7 +53,7 @@ function Dashboard() {
   }, [user]);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, index) => (
+    const newParticles = Array.from({ length: 25 }, (_, index) => (
       <div
         key={index}
         className={`particle particle-${
@@ -206,14 +206,13 @@ function Dashboard() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       
       <Navbar.Collapse id="basic-navbar-nav">
-        {/* Centralized Navigation Links */}
         <Nav className="navbar-nav">
+          <Nav.Link href="/home" className="mx-3">Home</Nav.Link>
           <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
-          <Nav.Link href="/reports" className="mx-3">Reports</Nav.Link>
-          <Nav.Link href="/statistics" className="mx-3">Statistics</Nav.Link>
+          <Nav.Link href="/transactions" className="mx-3">Transactions</Nav.Link>
+          <Nav.Link href="/predictions" className="mx-3">Predictions</Nav.Link>
         </Nav>
         
-        {/* Right Aligned Controls */}
         <div className="navbar-controls ml-auto">
           <Nav.Link href="/login" className="mx-3">LogOut</Nav.Link>
           <ToggleButtonGroup
@@ -226,12 +225,13 @@ function Dashboard() {
               onClick={handleThemeToggle}
               value={theme}
             >
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
+              {theme === "light" ? <FaMoon /> : <FaSun />}
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
       </Navbar.Collapse>
     </Navbar>
+
 
       <Container style={{ paddingTop: "80px" }}>
         <h2 className="my-4 text-center">Dashboard</h2>
