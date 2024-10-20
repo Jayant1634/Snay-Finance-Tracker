@@ -1,29 +1,22 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Card, Button, Navbar, Nav, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-import { FaChartLine, FaWallet, FaLightbulb, FaSun, FaMoon } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import "./HomePage.css";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap'; // Bootstrap components
+import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa'; // Icons for feature cards
+import FlaskImage from '../images/homePage.png'; // Assuming you have an image file named flask.png
+import './HomePage.css'; // Custom CSS for futuristic styling
 
 function HomePage() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const navigate = useNavigate();
 
-  const handleThemeToggle = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.body.className = newTheme;
-  };
-
+  // Function to handle redirecting to login for logout
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
+    navigate('/login'); // Redirect to login page after logout
   };
 
   return (
-    <div className={`home-page ${theme}`}>
-      {/* Navbar */}
-      <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top enhanced-navbar">
+    <div className="landing-page-bg">
+      {/* Enhanced Navbar with Logout */}
+      <Navbar expand="lg" className="mb-4 fixed-top enhanced-navbar">
         <Navbar.Brand href="/home" className="mx-3">
           SnayExpTracker
         </Navbar.Brand>
@@ -35,27 +28,43 @@ function HomePage() {
             <Nav.Link href="/transactions" className="mx-3">Transactions</Nav.Link>
             <Nav.Link href="/predictions" className="mx-3">Predictions</Nav.Link>
           </Nav>
-          <ToggleButtonGroup type="radio" name="theme-toggle" className="ms-3">
-            <ToggleButton variant="outline-secondary" onClick={handleThemeToggle} value={theme}>
-              {theme === "light" ? <FaMoon /> : <FaSun />}
-            </ToggleButton>
-          </ToggleButtonGroup>
           <Button variant="outline-danger" onClick={handleLogout} className="ms-3">
             Logout
           </Button>
         </Navbar.Collapse>
       </Navbar>
 
-      {/* Main Content */}
-      <Container className="text-center main-content">
-        <h1 className="mb-4 animated-text">Welcome to SnayExpTracker!</h1>
-        <p className="lead mb-5 animated-subtext">
-          Track your expenses, monitor your spending habits, and get insightful predictions for better financial planning.
-        </p>
-        
-        {/* Feature Cards */}
+      <Container className="d-flex align-items-center vh-100">
+        <Row className="w-100">
+          {/* Left column with the text content and arrows */}
+          <Col xs={12} md={7} className="text-left position-relative">
+            <h1 className="display-4 text-white">Track Your Expenses Effortlessly</h1>
+            <p className="lead text-white-50">
+              Gain full control of your finances with real-time insights.
+            </p>
+            <p className="text-white-50">
+              Join us to manage your expenses, set budgets, and achieve your financial goals with ease.
+            </p>
+
+            {/* Animated arrows pointing toward the login button */}
+            <div className="arrow-container">
+              <div className="arrow arrow-1"></div>
+              <div className="arrow arrow-2"></div>
+              <div className="arrow arrow-3"></div>
+            </div>
+          </Col>
+          
+          {/* Right column with the Flask image */}
+          <Col xs={12} md={5} className="d-flex align-items-center justify-content-center mt-4 mt-md-0">
+            <img src={FlaskImage} alt="Flask Logo" className="flask-image"/>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Feature Cards */}
+      <Container className="my-5">
         <Row className="justify-content-center">
-          <Col md={4}>
+          <Col xs={12} sm={6} md={4}>
             <Card className="mb-4 feature-card futuristic-card">
               <Card.Body>
                 <FaWallet className="feature-icon animated-icon" />
@@ -69,7 +78,7 @@ function HomePage() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col xs={12} sm={6} md={4}>
             <Card className="mb-4 feature-card futuristic-card">
               <Card.Body>
                 <FaChartLine className="feature-icon animated-icon" />
@@ -83,7 +92,7 @@ function HomePage() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col xs={12} sm={6} md={4}>
             <Card className="mb-4 feature-card futuristic-card">
               <Card.Body>
                 <FaLightbulb className="feature-icon animated-icon" />
@@ -99,6 +108,12 @@ function HomePage() {
           </Col>
         </Row>
       </Container>
+
+      {/* Footer with credits at the bottom right */}
+      <div className="footer-credits">
+        <p>Made by Snay Coorperation</p>
+        <p>Owner: Jayant Khandelwal</p>
+      </div>
     </div>
   );
 }

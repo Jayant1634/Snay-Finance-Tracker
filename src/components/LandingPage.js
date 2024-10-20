@@ -1,16 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Navbar, Nav } from 'react-bootstrap'; // Bootstrap components
+import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap'; // Bootstrap components
+import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa'; // Icons for feature cards
 import './LandingPage.css'; // Custom CSS for futuristic styling
 
 function LandingPage() {
   const navigate = useNavigate();
 
-  // Function to handle redirecting to the login page
+  // Function to handle redirecting to the login and signup pages
   const redirectToSignup = () => {
-    navigate('/register'); // Redirect to login page
+    navigate('/register'); // Redirect to signup page
   };
-  const redirectToLogin= () => {
+  const redirectToLogin = () => {
     navigate('/login'); // Redirect to login page
   };
 
@@ -62,11 +63,60 @@ function LandingPage() {
             </div>
           </Col>
 
-          {/* Right column with the button */}
-          <Col md={4} className="d-flex align-items-center justify-content-center">
-            <Button onClick={redirectToSignup} variant="primary" className="mt-3 futuristic-button">
+          {/* Right column with the Login and Signup buttons */}
+          <Col md={4} className="d-flex flex-column align-items-center justify-content-center">
+            
+            <Button onClick={redirectToSignup} variant="outline-primary" className="mt-2 futuristic-button">
               Sign Up
             </Button>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Feature Cards */}
+      <Container className="my-5">
+        <Row className="justify-content-center">
+          <Col xs={12} sm={6} md={4}>
+            <Card className="mb-4 feature-card futuristic-card">
+              <Card.Body>
+                <FaWallet className="feature-icon animated-icon" />
+                <Card.Title>Manage Transactions</Card.Title>
+                <Card.Text>
+                  Add, view, and filter your daily expenses and incomes in a simple, intuitive interface.
+                </Card.Text>
+                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
+                View Transactions
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={4}>
+            <Card className="mb-4 feature-card futuristic-card">
+              <Card.Body>
+                <FaChartLine className="feature-icon animated-icon" />
+                <Card.Title>Dashboard Overview</Card.Title>
+                <Card.Text>
+                  Get a quick overview of your current balance and spending patterns in the dashboard.
+                </Card.Text>
+                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
+                Go to Dashboard
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={12} sm={6} md={4}>
+            <Card className="mb-4 feature-card futuristic-card">
+              <Card.Body>
+                <FaLightbulb className="feature-icon animated-icon" />
+                <Card.Title>Expense Predictions</Card.Title>
+                <Card.Text>
+                  Use advanced algorithms to predict your future expenses and plan ahead.
+                </Card.Text>
+                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
+                See Predictions
+                </Button>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>

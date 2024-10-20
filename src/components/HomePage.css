@@ -1,7 +1,7 @@
 /* General Styling for HomePage */
 .home-page {
     padding: 40px;
-    background: linear-gradient(135deg, #f0f0f5, #dfe4ea, #f8f9fa);
+    background: linear-gradient(135deg, #232526, #414345, #6b6b6b, #a2a4a7);
     color: #2c3e50;
     overflow-x: hidden;
     background-size: 400% 400%;
@@ -38,7 +38,8 @@
 .futuristic-card {
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.144);
+    color: #ffffff;
     text-align: center;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     overflow: hidden;
@@ -73,17 +74,31 @@
 }
 
 /* Navbar */
+/* Navbar */
 .enhanced-navbar {
-    background-color: rgba(25, 25, 25, 0.85);
+    background-color: rgba(25, 25, 25, 0.5) !important; /* Slightly transparent */
+    backdrop-filter: blur(10px); /* Apply blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
     padding: 12px 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     height: 60px;
+    color: #ffffff !important; /* Ensure text remains white */
     z-index: 1000;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
-body.light .enhanced-navbar {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Navbar Links */
+.enhanced-navbar .navbar-nav .nav-link {
+    color: #ffffff !important; /* Ensure navbar links are white */
+}
+
+.enhanced-navbar .navbar-brand {
+    color: #ffffff !important; /* Ensure brand text is white */
+}
+
+/* Override Bootstrap hover effect to keep white text */
+.enhanced-navbar .navbar-nav .nav-link:hover {
+    color: #ffffff !important; /* Maintain white color on hover */
 }
 
 /* Smooth Button Hover Effect */
@@ -97,4 +112,24 @@ body.light .enhanced-navbar {
     background: linear-gradient(135deg, #36a2eb, #1e90ff);
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(54, 162, 235, 0.7);
+}
+
+/* Flask Image for Mobile */
+.flask-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    animation: fadeIn 1.5s ease-in-out;
+    transition: transform 0.3s;
+}
+
+.flask-image:hover {
+    transform: scale(1.1);
+}
+
+/* Media Query for Padding Adjustments */
+@media (max-width: 576px) {
+    .landing-page-bg {
+        padding-top: 80px; /* Adjust spacing for smaller screens */
+    }
 }
