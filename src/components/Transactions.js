@@ -12,7 +12,7 @@ import {
   ToggleButton,
   Pagination,
 } from "react-bootstrap";
-import { FaSearch, FaSun, FaMoon } from "react-icons/fa"; // Importing icons
+import { FaSearch, FaSun, FaMoon, FaSort, FaSortUp, FaSortDown } from "react-icons/fa"; // Importing icons
 import { API_URL } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./Transactions.css";
@@ -24,6 +24,8 @@ function TransactionsPage() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [currentPage, setCurrentPage] = useState(1);
   const [transactionsPerPage] = useState(10);
+  const [sortField, setSortField] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc"); // "asc" or "desc"
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -37,11 +39,25 @@ function TransactionsPage() {
 
   useEffect(() => {
     setFilteredTransactions(
-      transactions.filter((transaction) =>
-        transaction.category.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      transactions
+        .filter((transaction) =>
+          transaction.category.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .sort((a, b) => {
+          if (sortField) {
+            const isAsc = sortOrder === "asc";
+            if (a[sortField] < b[sortField]) {
+              return isAsc ? -1 : 1;
+            }
+            if (a[sortField] > b[sortField]) {
+              return isAsc ? 1 : -1;
+            }
+            return 0;
+          }
+          return 0;
+        })
     );
-  }, [searchTerm, transactions]);
+  }, [searchTerm, transactions, sortField, sortOrder]);
 
   const fetchTransactions = async () => {
     try {
@@ -63,6 +79,12 @@ function TransactionsPage() {
     document.body.className = newTheme;
   };
 
+  const handleSort = (field) => {
+    const order = sortField === field && sortOrder === "asc" ? "desc" : "asc";
+    setSortField(field);
+    setSortOrder(order);
+  };
+
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
   const currentTransactions = filteredTransactions.slice(
@@ -81,9 +103,9 @@ function TransactionsPage() {
   return (
     <div className={`transactions-page ${theme}`}>
       {/* Navbar */}
-      <Navbar bg={theme} variant={theme} expand="lg" className="mb-4">
+      <Navbar expand="lg" className={`navbar-custom ${theme}`}>
         <Navbar.Brand href="/dashboard" className="mx-3">
-          SnayExpTracker
+          ExpenseTracker
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -110,37 +132,52 @@ function TransactionsPage() {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <Button variant="outline-success">
-              <FaSearch /> {/* Search icon */}
+            <Button variant="outline-secondary">
+              <FaSearch />
             </Button>
           </Form>
           <ToggleButtonGroup
             type="radio"
             name="theme-toggle"
-            className="ms-3" // Added margin-start here for spacing
+            className="ms-3"
           >
             <ToggleButton
               variant="outline-secondary"
               onClick={handleThemeToggle}
               value={theme}
             >
-              {theme === "light" ? <FaMoon /> : <FaSun />} {/* Moon and Sun icons */}
+              {theme === "light" ? <FaMoon /> : <FaSun />}
             </ToggleButton>
           </ToggleButtonGroup>
         </Navbar.Collapse>
       </Navbar>
 
-      {/* Transactions Table */}
+      {/* Paragraph Above Table */}
       <Container className={`transactions-container ${theme}`}>
+        
+
         <h2 className="my-4 text-center">All Transactions</h2>
+        <p className="table-description text-center my-3">
+          Below is a detailed overview of your recent transactions. Use the search feature or pagination to navigate through the records efficiently.
+        </p>
         <Table striped bordered hover variant={theme}>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Category</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Date</th>
+              <th onClick={() => handleSort("_id")}>
+                # {sortField === "_id" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
+              </th>
+              <th onClick={() => handleSort("category")}>
+                Category {sortField === "category" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
+              </th>
+              <th onClick={() => handleSort("type")}>
+                Type {sortField === "type" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
+              </th>
+              <th onClick={() => handleSort("amount")}>
+                Amount {sortField === "amount" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
+              </th>
+              <th onClick={() => handleSort("date")}>
+                Date {sortField === "date" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
+              </th>
             </tr>
           </thead>
           <tbody>
