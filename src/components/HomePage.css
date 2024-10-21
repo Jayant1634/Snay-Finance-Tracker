@@ -1,11 +1,24 @@
 /* General Styling for HomePage */
 .home-page {
     padding: 40px;
-    background: linear-gradient(135deg, #232526, #414345, #6b6b6b, #a2a4a7);
+    background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa, #93c5fd) !important;
     color: #2c3e50;
     overflow-x: hidden;
     background-size: 400% 400%;
     animation: smoothBgShift 20s ease infinite;
+}
+/* Ensure Body Background is Set */
+body {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa, #93c5fd) !important;
+    background-size: 400% 400%;
+    animation: smoothBgShift 20s ease infinite;
+    color: #2c3e50;
+}
+
+/* General Styling for HomePage */
+.home-page {
+    padding: 40px;
+    overflow-x: hidden;
 }
 
 /* Background Animation */
@@ -53,7 +66,7 @@
 /* Feature Icons */
 .feature-icon {
     font-size: 2.5rem;
-    color: #1e90ff;
+    color: #ffffff;
     margin-bottom: 15px;
 }
 
@@ -74,8 +87,10 @@
 }
 
 /* Navbar */
-/* Navbar */
 .enhanced-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
     background-color: rgba(25, 25, 25, 0.5) !important; /* Slightly transparent */
     backdrop-filter: blur(10px); /* Apply blur */
     -webkit-backdrop-filter: blur(10px); /* For Safari support */
@@ -87,13 +102,25 @@
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
+/* Ensure Navbar Brand is Black */
+.enhanced-navbar .heading-navbar {
+    color: #000000 !important; /* Force brand text to be black */
+    font-weight: bold;
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
 /* Navbar Links */
 .enhanced-navbar .navbar-nav .nav-link {
     color: #ffffff !important; /* Ensure navbar links are white */
 }
 
-.enhanced-navbar .navbar-brand {
-    color: #ffffff !important; /* Ensure brand text is white */
+body.light .enhanced-navbar .navbar-nav .nav-link {
+    color: #212529 !important; /* Dark text for light mode */
+}
+
+.enhanced-navbar .navbar-brand:hover {
+    color: #1e90ff !important; /* Optional: Bright blue on hover */
 }
 
 /* Override Bootstrap hover effect to keep white text */
@@ -114,10 +141,10 @@
     box-shadow: 0 10px 20px rgba(54, 162, 235, 0.7);
 }
 
-/* Flask Image for Mobile */
+/* Flask Image for Larger Display */
 .flask-image {
-    width: 100%;
-    max-width: 200px;
+    width: 80%; /* Allow the image to take up 80% of its container's width */
+    max-width: 400px; /* Increase the max width to make it appear larger */
     height: auto;
     animation: fadeIn 1.5s ease-in-out;
     transition: transform 0.3s;
@@ -127,9 +154,11 @@
     transform: scale(1.1);
 }
 
-/* Media Query for Padding Adjustments */
+/* Media Query for Mobile View */
 @media (max-width: 576px) {
-    .landing-page-bg {
-        padding-top: 80px; /* Adjust spacing for smaller screens */
+    .flask-image {
+        width: 100%; /* Ensure the image remains responsive on smaller screens */
+        max-width: 300px; /* Adjust the max width for mobile view */
+        height: auto;
     }
 }

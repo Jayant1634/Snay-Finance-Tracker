@@ -1,42 +1,43 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap'; // Bootstrap components
-import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa'; // Icons for feature cards
-import FlaskImage from '../images/homePage.png'; // Assuming you have an image file named flask.png
-import './HomePage.css'; // Custom CSS for futuristic styling
+import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
+import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
+import FlaskImage from '../images/landingPage.png';
+import './HomePage.css';
 
 function HomePage() {
   const navigate = useNavigate();
 
-  // Function to handle redirecting to login for logout
   const handleLogout = () => {
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login');
   };
 
   return (
-    <div className="landing-page-bg">
-      {/* Enhanced Navbar with Logout */}
-      <Navbar expand="lg" className="mb-4 fixed-top enhanced-navbar">
-        <Navbar.Brand href="/home" className="mx-3">
-          SnayExpTracker
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/home" className="mx-3">Home</Nav.Link>
-            <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
-            <Nav.Link href="/transactions" className="mx-3">Transactions</Nav.Link>
-            <Nav.Link href="/predictions" className="mx-3">Predictions</Nav.Link>
-          </Nav>
-          <Button variant="outline-danger" onClick={handleLogout} className="ms-3">
-            Logout
-          </Button>
-        </Navbar.Collapse>
-      </Navbar>
+    <div className="home-page-bg">
+      
 
+      {/* Hero Section */}{/* Enhanced Navbar with Logout */}
+      <Navbar expand="lg" className="fixed-top enhanced-navbar">
+        <Container>
+          <Navbar.Brand href="/home" className="text-white">
+            SnayExpTracker
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto align-items-center">
+              <Nav.Link href="/home" className="mx-3 text-white">Home</Nav.Link>
+              <Nav.Link href="/dashboard" className="mx-3 text-white">Dashboard</Nav.Link>
+              <Nav.Link href="/transactions" className="mx-3 text-white">Transactions</Nav.Link>
+              <Nav.Link href="/predictions" className="mx-3 text-white">Predictions</Nav.Link>
+              <Button variant="outline-danger" onClick={handleLogout} className="ms-3 logout-button">
+                Logout
+              </Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <Container className="d-flex align-items-center vh-100">
-        <Row className="w-100">
-          {/* Left column with the text content and arrows */}
+        <Row className="w-100 align-items-center">
           <Col xs={12} md={7} className="text-left position-relative">
             <h1 className="display-4 text-white">Track Your Expenses Effortlessly</h1>
             <p className="lead text-white-50">
@@ -46,26 +47,26 @@ function HomePage() {
               Join us to manage your expenses, set budgets, and achieve your financial goals with ease.
             </p>
 
-            {/* Animated arrows pointing toward the login button */}
+            {/* Animated Arrows */}
             <div className="arrow-container">
               <div className="arrow arrow-1"></div>
               <div className="arrow arrow-2"></div>
               <div className="arrow arrow-3"></div>
             </div>
           </Col>
-          
-          {/* Right column with the Flask image */}
+
+          {/* Right Column with Flask Image */}
           <Col xs={12} md={5} className="d-flex align-items-center justify-content-center mt-4 mt-md-0">
-            <img src={FlaskImage} alt="Flask Logo" className="flask-image"/>
+            <img src={FlaskImage} alt="Flask Logo" className="img-fluid flask-image" />
           </Col>
         </Row>
       </Container>
 
       {/* Feature Cards */}
-      <Container className="my-5">
+      <Container className="feature-cards-section my-5">
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card futuristic-card">
               <Card.Body>
                 <FaWallet className="feature-icon animated-icon" />
                 <Card.Title>Manage Transactions</Card.Title>
@@ -78,8 +79,8 @@ function HomePage() {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card futuristic-card">
               <Card.Body>
                 <FaChartLine className="feature-icon animated-icon" />
                 <Card.Title>Dashboard Overview</Card.Title>
@@ -92,8 +93,8 @@ function HomePage() {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card futuristic-card">
               <Card.Body>
                 <FaLightbulb className="feature-icon animated-icon" />
                 <Card.Title>Expense Predictions</Card.Title>
@@ -108,12 +109,13 @@ function HomePage() {
           </Col>
         </Row>
       </Container>
-
-      {/* Footer with credits at the bottom right */}
-      <div className="footer-credits">
-        <p>Made by Snay Coorperation</p>
-        <p>Owner: Jayant Khandelwal</p>
-      </div>
+{/* Footer Section */}
+<footer className="footer-section text-center py-3">
+        <Container>
+          <p>Made by Snay Corporation | Owner: Jayant Khandelwal</p>
+        </Container>
+      </footer>
+      
     </div>
   );
 }

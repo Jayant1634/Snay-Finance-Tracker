@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap'; // Bootstrap components
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa'; // Icons for feature cards
-import './LandingPage.css'; // Custom CSS for futuristic styling
+import './LandingPage.css'; // Custom CSS for styling
+import heroImage from '../images/landingPage.png'; // Importing hero image
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -16,13 +17,13 @@ function LandingPage() {
   };
 
   return (
-    <div className="landing-page-bg">
-     {/* Animated Transparent Navbar */}
-      <Navbar expand="lg" className="navbar-transparent navbar-fixed-top animated-navbar">
+    <div className="landing-page">
+      {/* Navbar */}
+      <Navbar expand="lg" className="navbar navbar-light fixed-top">
         <Container>
           {/* Brand aligned to the left */}
           <Navbar.Brand href="#" className="text-white">
-            Snay Expense Tracker
+            Health Check Pro
           </Navbar.Brand>
 
           {/* Navbar toggle button for mobile view */}
@@ -31,11 +32,7 @@ function LandingPage() {
           {/* Navbar items and alignment */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-center">
-              {/* Empty Nav to push login button to the far right */}
-            </Nav>
-            {/* Log In button aligned to the far right */}
-            <Nav>
-              <Button variant="outline-light" className="mx-2" onClick={redirectToLogin}>
+              <Button variant="primary" className="login-button" onClick={redirectToLogin}>
                 Log In
               </Button>
             </Nav>
@@ -43,77 +40,71 @@ function LandingPage() {
         </Container>
       </Navbar>
 
-      <Container className="d-flex align-items-center vh-100">
-        <Row className="w-100">
-          {/* Left column with the text content and arrows */}
-          <Col md={8} className="text-left position-relative">
-            <h1 className="display-4 text-white">Track Your Expenses Effortlessly</h1>
-            <p className="lead text-white-50">
-              Gain full control of your finances with real-time insights.
-            </p>
-            <p className="text-white-50">
-              Join us to manage your expenses, set budgets, and achieve your financial goals with ease.
-            </p>
+      {/* Hero Section */}
+      <div className="hero-section">
+        <div className="arrows">
+          <div className="arrow"></div>
+          <div className="arrow"></div>
+          <div className="arrow"></div>
+        </div>
 
-            {/* Animated arrows pointing toward the login button */}
-            <div className="arrow-container">
-              <div className="arrow arrow-1"></div>
-              <div className="arrow arrow-2"></div>
-              <div className="arrow arrow-3"></div>
-            </div>
-          </Col>
+        <Container className="d-flex align-items-center vh-100">
+          <Row className="w-100 align-items-center">
+            <Col md={6} className="text-left order-md-1 order-2">
+              <h1 className="display-4">Track Your Health Effortlessly</h1>
+              <p className="lead">Gain full control of your finances with real-time insights.</p>
+              <Button onClick={redirectToSignup} variant="primary" className="signup-button mt-3">
+                Sign Up
+              </Button>
+            </Col>
+            <Col md={6} className="order-md-2 order-1">
+              <img src={heroImage} alt="Hero" className="img-fluid" />
+            </Col>
+          </Row>
+        </Container>
+      </div>
 
-          {/* Right column with the Login and Signup buttons */}
-          <Col md={4} className="d-flex flex-column align-items-center justify-content-center">
-            
-            <Button onClick={redirectToSignup} variant="outline-primary" className="mt-2 futuristic-button">
-              Sign Up
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* Feature Cards */}
-      <Container className="my-5">
+      {/* Feature Cards Section */}
+      <Container className="feature-cards-section my-5">
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card">
               <Card.Body>
-                <FaWallet className="feature-icon animated-icon" />
+                <FaWallet className="feature-icon" />
                 <Card.Title>Manage Transactions</Card.Title>
                 <Card.Text>
                   Add, view, and filter your daily expenses and incomes in a simple, intuitive interface.
                 </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
-                View Transactions
+                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
+                  View Transactions
                 </Button>
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card">
               <Card.Body>
-                <FaChartLine className="feature-icon animated-icon" />
+                <FaChartLine className="feature-icon" />
                 <Card.Title>Dashboard Overview</Card.Title>
                 <Card.Text>
                   Get a quick overview of your current balance and spending patterns in the dashboard.
                 </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
-                Go to Dashboard
+                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
+                  Go to Dashboard
                 </Button>
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4}>
-            <Card className="mb-4 feature-card futuristic-card">
+          <Col xs={12} sm={6} md={4} className="mb-4">
+            <Card className="feature-card">
               <Card.Body>
-                <FaLightbulb className="feature-icon animated-icon" />
+                <FaLightbulb className="feature-icon" />
                 <Card.Title>Expense Predictions</Card.Title>
                 <Card.Text>
                   Use advanced algorithms to predict your future expenses and plan ahead.
                 </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="futuristic-button">
-                See Predictions
+                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
+                  See Predictions
                 </Button>
               </Card.Body>
             </Card>
@@ -121,13 +112,15 @@ function LandingPage() {
         </Row>
       </Container>
 
-      {/* Footer with credits at the bottom right */}
-      <div className="footer-credits">
-        <p>Made by Snay Coorperation</p>
-        <p>Owner: Jayant Khandelwal</p>
-      </div>
+      {/* Footer Section */}
+      <footer className="footer-section text-center py-3">
+        <Container>
+          <p>Made by Snay Corporation | Owner: Jayant Khandelwal</p>
+        </Container>
+      </footer>
     </div>
   );
 }
 
 export default LandingPage;
+
