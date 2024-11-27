@@ -112,7 +112,11 @@ function HomePage() {
                 <Card.Text>
                   Use advanced algorithms to predict your future expenses and plan ahead.
                 </Card.Text>
-                <Button variant="primary" onClick={() => navigate("/predictions")} className="futuristic-button">
+                <Button
+                  variant="primary"
+                  onClick={() => (window.location.href = "https://expenseandstocks.streamlit.app")}
+                  className="futuristic-button"
+                >
                   See Predictions
                 </Button>
               </Card.Body>
