@@ -123,7 +123,7 @@ function HomePage() {
 {/* Footer Section */}
 <footer className="footer-section text-center py-3">
         <Container>
-          <p>Made by Snay Corporation | Owner: Jitesh Ahuja | Swastik Sharma | Pushpit Kamboj</p>
+          <p>Made by Snay Corporation </p>
         </Container>
       </footer>
       
