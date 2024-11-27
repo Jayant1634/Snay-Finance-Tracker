@@ -2,13 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
-import FlaskImage from '../images/landingPage.png';
+import Lottie from 'react-lottie';
+import animationData from '../lottie_animations/landingPage.json';
 import './HomePage.module.css';
 function HomePage() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     navigate('/login');
+  };
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ function HomePage() {
 
           {/* Right Column with Flask Image */}
           <Col xs={12} md={5} className="d-flex align-items-center justify-content-center mt-4 mt-md-0">
-            <img src={FlaskImage} alt="Flask Logo" className="img-fluid flask-image" />
+            <Lottie options={defaultOptions} height="120%" width="120%" />
           </Col>
         </Row>
       </Container>
@@ -113,7 +123,7 @@ function HomePage() {
 {/* Footer Section */}
 <footer className="footer-section text-center py-3">
         <Container>
-          <p>Made by Snay Corporation | Owner: Jayant Khandelwal</p>
+          <p>Made by Snay Corporation | Owner: Jitesh Ahuja | Swastik Sharma | Pushpit Kamboj</p>
         </Container>
       </footer>
       
