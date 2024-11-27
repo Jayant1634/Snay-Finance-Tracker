@@ -1,0 +1,217 @@
+/* General Styling for HomePage */
+.home-page-bg {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa, #93c5fd) !important;
+    color: #ffffff;
+    overflow-x: hidden;
+    background-size: 400% 400%;
+    animation: smoothBgShift 20s ease infinite;
+}
+
+/* Ensure Body Background is Set */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+/* Background Animation */
+@keyframes smoothBgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section Padding */
+.main-content {
+    padding-top: 100px;
+}
+
+/* Animated Arrows */
+/* Animated Arrows */
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.arrow {
+    width: 30px;
+    height: 30px;
+    border: solid #ffffff;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+.arrow-1 {
+    animation-delay: 0s;
+}
+
+.arrow-2 {
+    animation-delay: 0.3s;
+}
+
+.arrow-3 {
+    animation-delay: 0.6s;
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateY(0) rotate(45deg) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(10px) rotate(45deg) scale(1.1);
+        opacity: 1;
+    }
+}
+
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateY(0) rotate(45deg);
+    }
+    50% {
+        transform: translateY(10px) rotate(45deg);
+    }
+}
+
+/* Flask Image Continuous Zoom Animation */
+.flask-image {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    animation: zoomInOut 2.5s ease-in-out infinite; /* Continuous zoom in/out */
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Keyframes for Zoom In and Out */
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Slight zoom-in at the midpoint */
+    }
+}
+
+
+/* Navbar */
+.enhanced-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(25, 25, 25, 0.5) !important;
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 60px;
+    z-index: 1000;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.enhanced-navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.enhanced-navbar .navbar-brand:hover {
+    color: #1e90ff !important;
+}
+
+.enhanced-navbar .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.enhanced-navbar .navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Feature Cards */
+.futuristic-card {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.144);
+    color: #ffffff;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+}
+
+.futuristic-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Feature Icons */
+.feature-icon {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+/* Button Styling */
+.futuristic-button {
+    background-color: #1e90ff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.futuristic-button:hover {
+    background: linear-gradient(135deg, #36a2eb, #1e90ff);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(54, 162, 235, 0.7);
+}
+
+/* Footer */
+.footer-section {
+    background-color: rgba(25, 25, 25, 0.1); /* Darken the background for better contrast */
+    color: #ffffff;
+    font-size: 1rem; /* Adjusted font size for readability */
+    padding: 20px 0; /* Add padding to increase box height */
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-section p {
+    margin: 0;
+    font-size: 1.1rem; /* Fine-tuned for visibility */
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    color: #ffffff; /* Softer color for text */
+}
+
+.footer-section a {
+    color: #36a2eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+    color: #1e90ff;
+}
+
+/* Media Query for Mobile View */
+@media (max-width: 576px) {
+    .flask-image {
+        width: 90%;
+        max-width: 300px;
+        border-radius: 8px;
+    }
+}

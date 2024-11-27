@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import FlaskImage from '../images/landingPage.png';
-import './HomePage.css';
-
+import './HomePage.module.css';
 function HomePage() {
   const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ function HomePage() {
               <Nav.Link href="/home" className="mx-3 text-white">Home</Nav.Link>
               <Nav.Link href="/dashboard" className="mx-3 text-white">Dashboard</Nav.Link>
               <Nav.Link href="/transactions" className="mx-3 text-white">Transactions</Nav.Link>
-              <Nav.Link href="/predictions" className="mx-3 text-white">Predictions</Nav.Link>
+              <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3 text-white">Predictions</Nav.Link>
               <Button variant="outline-danger" onClick={handleLogout} className="ms-3 logout-button">
                 Logout
               </Button>
@@ -36,6 +35,7 @@ function HomePage() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* Hero Section */}
       <Container className="d-flex align-items-center vh-100">
         <Row className="w-100 align-items-center">
           <Col xs={12} md={7} className="text-left position-relative">
@@ -62,6 +62,7 @@ function HomePage() {
         </Row>
       </Container>
 
+      
       {/* Feature Cards */}
       <Container className="feature-cards-section my-5">
         <Row className="justify-content-center">

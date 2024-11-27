@@ -1,121 +1,93 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap'; // Bootstrap components
-import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa'; // Icons for feature cards
-import './LandingPage.css'; // Custom CSS for styling
-import heroImage from '../images/landingPage.png'; // Importing hero image
+import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
+import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
+import Lottie from 'react-lottie';
+import animationData from '../lottie_animations/landingPage.json';
+import styles from './LandingPage.module.css';
 
 function LandingPage() {
   const navigate = useNavigate();
 
-  // Function to handle redirecting to the login and signup pages
-  const redirectToSignup = () => {
-    navigate('/register'); // Redirect to signup page
-  };
-  const redirectToLogin = () => {
-    navigate('/login'); // Redirect to login page
+  const redirectToSignup = () => navigate('/register');
+  const redirectToLogin = () => navigate('/login');
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
   };
 
   return (
-    <div className="landing-page">
-      {/* Navbar */}
-      <Navbar expand="lg" className="navbar navbar-light fixed-top">
+    <div className={styles.landingPage}>
+      <Navbar expand="lg" className={`${styles.navbar} navbar-light fixed-top`}>
         <Container>
-          {/* Brand aligned to the left */}
-          <Navbar.Brand href="#" className="text-white">
-            Health Check Pro
-          </Navbar.Brand>
-
-          {/* Navbar toggle button for mobile view */}
+          <Navbar.Brand href="#" className={styles.navbarBrand}>Snay Expense Tracker</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-          {/* Navbar items and alignment */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-center">
-              <Button variant="primary" className="login-button" onClick={redirectToLogin}>
-                Log In
-              </Button>
+              <Button variant="primary" className={styles.loginButton} onClick={redirectToLogin}>Log In</Button>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* Hero Section */}
-      <div className="hero-section">
-        <div className="arrows">
-          <div className="arrow"></div>
-          <div className="arrow"></div>
-          <div className="arrow"></div>
-        </div>
-
+      <div className={styles.heroSection}>
         <Container className="d-flex align-items-center vh-100">
           <Row className="w-100 align-items-center">
             <Col md={6} className="text-left order-md-1 order-2">
-              <h1 className="display-4">Track Your Health Effortlessly</h1>
-              <p className="lead">Gain full control of your finances with real-time insights.</p>
-              <Button onClick={redirectToSignup} variant="primary" className="signup-button mt-3">
+              <h1 className={styles.heroTitle}>Track Your Expense Effortlessly</h1>
+              <p className={styles.heroSubtitle}>Gain full control of your finances with real-time insights.</p>
+              <Button onClick={redirectToSignup} variant="primary" className={`${styles.signupButton} mt-3`}>
                 Sign Up
               </Button>
+              <div className={styles.arrowDown}></div>
             </Col>
             <Col md={6} className="order-md-2 order-1">
-              <img src={heroImage} alt="Hero" className="img-fluid" />
+              <Lottie options={defaultOptions} height="100%" width="100%" />
             </Col>
           </Row>
         </Container>
       </div>
 
-      {/* Feature Cards Section */}
-      <Container className="feature-cards-section my-5">
+      <Container className={`${styles.featureCardsSection} my-5`}>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4} className="mb-4">
-            <Card className="feature-card">
-              <Card.Body>
-                <FaWallet className="feature-icon" />
-                <Card.Title>Manage Transactions</Card.Title>
-                <Card.Text>
-                  Add, view, and filter your daily expenses and incomes in a simple, intuitive interface.
-                </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
-                  View Transactions
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={4} className="mb-4">
-            <Card className="feature-card">
-              <Card.Body>
-                <FaChartLine className="feature-icon" />
-                <Card.Title>Dashboard Overview</Card.Title>
-                <Card.Text>
-                  Get a quick overview of your current balance and spending patterns in the dashboard.
-                </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
-                  Go to Dashboard
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} sm={6} md={4} className="mb-4">
-            <Card className="feature-card">
-              <Card.Body>
-                <FaLightbulb className="feature-icon" />
-                <Card.Title>Expense Predictions</Card.Title>
-                <Card.Text>
-                  Use advanced algorithms to predict your future expenses and plan ahead.
-                </Card.Text>
-                <Button variant="primary" onClick={redirectToLogin} className="mt-3">
-                  See Predictions
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+          {[{
+            icon: <FaWallet />,
+            title: 'Manage Transactions',
+            text: 'Add, view, and filter your daily expenses and incomes in a simple, intuitive interface.',
+            btnText: 'View Transactions'
+          }, {
+            icon: <FaChartLine />,
+            title: 'Dashboard Overview',
+            text: 'Get a quick overview of your current balance and spending patterns in the dashboard.',
+            btnText: 'Go to Dashboard'
+          }, {
+            icon: <FaLightbulb />,
+            title: 'Expense Predictions',
+            text: 'Use advanced algorithms to predict your future expenses and plan ahead.',
+            btnText: 'See Predictions'
+          }].map((feature, idx) => (
+            <Col xs={12} sm={6} md={4} className="mb-4" key={idx}>
+              <Card className={styles.featureCard}>
+                <Card.Body>
+                  <div className={styles.featureIcon}>{feature.icon}</div>
+                  <Card.Title>{feature.title}</Card.Title>
+                  <Card.Text>{feature.text}</Card.Text>
+                  <Button variant="primary" onClick={redirectToLogin} className="mt-3">{feature.btnText}</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </Container>
 
-      {/* Footer Section */}
-      <footer className="footer-section text-center py-3">
-        <Container>
-          <p>Made by Snay Corporation | Owner: Jayant Khandelwal</p>
+      <footer className={`${styles.footerSection} text-center py-3`}>
+        <Container className={styles.footcont}>
+          <p>Made by Snay Corporation | Owner: Jitesh Ahuja </p>
         </Container>
       </footer>
     </div>
@@ -124,3 +96,6 @@ function LandingPage() {
 
 export default LandingPage;
 
+/* Changes in LandingPage.js */
+
+/* No additional changes needed as feature card sizes and spacing are handled via CSS */

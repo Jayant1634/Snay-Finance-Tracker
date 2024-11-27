@@ -1,0 +1,74 @@
+/* Container centered vertically and horizontally */
+.otpVerificationContainer {
+    min-height: 100vh; /* Full viewport height to center vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light background color */
+    padding: 20px; /* Padding around the container */
+  }
+  
+  /* Styling for the main box */
+  .otpVerificationBox {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    width: 80%; /* Set a width for desktop */
+    max-width: 900px; /* Maximum width to control size */
+  }
+  
+  /* Form styling */
+  .otpVerificationForm {
+    padding: 30px;
+    width: 100%;
+  }
+  
+  /* Image styles */
+  .otpVerificationImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  /* Media query to adjust layout on smaller screens */
+  @media (max-width: 767px) {
+    .otpVerificationBox {
+      flex-direction: column; /* Stack image and form vertically */
+    }
+  
+    .otpVerificationImage {
+      display: none; /* Hide the image on small screens */
+    }
+  }
+  
+  /* Adjust form controls and buttons */
+  .otpVerificationForm .form-control {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .otpVerificationForm .btn-primary {
+    background-color: #007bff; /* Primary color for button */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .otpVerificationForm .btn-link {
+    color: #007bff; /* Link color */
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  
+  .otpVerificationForm .btn-link:disabled {
+    color: #6c757d; /* Disabled color */
+    cursor: not-allowed;
+  }
+  

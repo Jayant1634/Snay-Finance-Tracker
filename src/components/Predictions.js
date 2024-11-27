@@ -58,7 +58,7 @@ function Predictions() {
             <Nav.Link href="/transactions" className="mx-3">
               Transactions
             </Nav.Link>
-            <Nav.Link href="/predictions" className="mx-3">
+            <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3">
               Predictions
             </Nav.Link>
           </Nav>

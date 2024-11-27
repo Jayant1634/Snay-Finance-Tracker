@@ -1,101 +1,61 @@
-/* Full-page background gradient and animation */
 .login-page {
-  background: linear-gradient(135deg, #1c1c1c, #00aaff, #3a7bd5);
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
+  background: linear-gradient(to right, #e0f7fa, #b3e5fc);
 }
 
-/* Gradient background animation */
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Full-size image on the left */
 .login-image-container {
   height: 100%;
-  width: 100%;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0;
 }
 
 .login-image {
-  height: 100%;
   width: 100%;
-  object-fit: cover; /* Ensures the image covers the entire area */
-  animation: imageMove 10s infinite ease-in-out; /* Adds subtle movement to the image */
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Subtle animation for the image */
-@keyframes imageMove {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); } /* Slight zoom in effect */
-  100% { transform: scale(1); }
-}
-
-/* Glassmorphism effect for the login box */
 .login-box {
-  background: rgba(255, 255, 255, 0.559);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(31, 38, 135, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 3rem;
-  max-width: 450px;
-  transition: transform 0.3s ease;
-}
-
-.login-box:hover {
-  transform: translateY(-5px);
-}
-
-/* Futuristic input fields */
-.futuristic-input {
-  background-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 400px;
+  width: 100%;
   border-radius: 10px;
-  padding: 14px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
 }
 
-.futuristic-input:focus {
-  background-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
-  color: #fff;
-  outline: none;
+.animated-login-box:hover {
+  transform: scale(1.05);
 }
 
-/* Futuristic button */
-.futuristic-button {
-  background: linear-gradient(45deg, #000000, #333333);
+.animated-input {
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animated-input:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+.btn-animated {
+  background-color: #2196f3;
   border: none;
-  color: white;
-  padding: 14px 40px;
-  font-size: 1.3rem;
-  border-radius: 50px;
-  transition: transform 0.3s ease, background 0.3s ease;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.futuristic-button:hover {
-  background: linear-gradient(45deg, #2a2a2b, #2f3030);
-  transform: translateY(-5px);
+.btn-animated:hover {
+  background-color: #1976d2;
+  transform: scale(1.03);
 }
 
-/* Add more space for overall layout */
-.login-page .row {
-  padding: 2rem;
+.link-animated {
+  color: #0d47a1 !important;
+  transition: color 0.3s ease;
+}
+
+.link-animated:hover {
+  color: #1565c0 !important;
+}
+
+.text-primary {
+  color: #0d47a1;
 }
