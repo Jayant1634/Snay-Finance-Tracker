@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
+import { Container, Button, Row, Col, Card } from 'react-bootstrap'; // Removed Navbar and Nav imports
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
 import styles from './LandingPage.module.css';
+import Navbar from './Navbar'; // Import the Navbar component
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -23,27 +24,22 @@ function LandingPage() {
 
   return (
     <div className={styles.landingPage}>
-      <Navbar expand="lg" className={`${styles.navbar} navbar-light fixed-top`}>
-        <Container>
-          <Navbar.Brand href="#" className={styles.navbarBrand}>StocksPortfolioManagement</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto align-items-center">
-              <Button variant="primary" className={styles.loginButton} onClick={redirectToLogin}>Log In</Button>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
+      <Navbar /> {/* Insert the Navbar component */}
+      
       <div className={styles.heroSection}>
         <Container className="d-flex align-items-center vh-100">
           <Row className="w-100 align-items-center">
             <Col md={6} className="text-left order-md-1 order-2">
               <h1 className={styles.heroTitle}>Track Your Expense Effortlessly</h1>
               <p className={styles.heroSubtitle}>Gain full control of your finances with real-time insights.</p>
-              <Button onClick={redirectToSignup} variant="primary" className={`${styles.signupButton} mt-3`}>
-                Sign Up
-              </Button>
+              <div className={`${styles.buttonGroup} d-flex justify-content-end`}>
+                <Button onClick={redirectToSignup} variant="primary" className={`${styles.signupButton} mt-3`}>
+                  Sign Up
+                </Button>
+                <Button onClick={redirectToLogin} variant="secondary" className={`${styles.loginButton} mt-3 ms-3`}>
+                  Log In
+                </Button>
+              </div>
               <div className={styles.arrowDown}></div>
             </Col>
             <Col md={6} className="order-md-2 order-1">

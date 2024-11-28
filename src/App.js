@@ -12,6 +12,7 @@ import ResetPassword from './components/ResetPassword';
 import LandingPage from './components/LandingPage';
 import Transactions from './components/Transactions';
 import HomePage from './components/HomePage';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/otp-verification" element={<OtpVerification />} /> {/* Add OTP route */}
           <Route path="/transactions" element={<Transactions/>} />          
           <Route path="/home" element={<HomePage />} />
+          <Route path="/profile" element={<Profile />} /> {/* Added Profile Route */}
 
         </Routes>
       </div>

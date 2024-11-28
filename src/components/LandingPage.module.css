@@ -20,6 +20,7 @@ body, html {
   /* Updated brand text color */
   font-family: 'Playfair Display', serif;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.029);
+  font-size: 1.5rem; /* Increased font size */
 }
 
 .loginButton,
@@ -224,4 +225,15 @@ body, html {
 .signupButton:focus {
   outline: none;
   box-shadow: 0 0 12px rgba(33, 147, 176, 0.5);
+}
+
+/* Button Group in Hero Section */
+.buttonGroup {
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust Log In Button for Secondary Variant */
+.loginButton {
+  /* Optional: Customize if needed */
 }
