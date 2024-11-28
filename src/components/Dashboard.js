@@ -20,6 +20,7 @@ import {
   ToggleButton,
   Row,
   Col,
+  Dropdown,
 } from "react-bootstrap";
 import AddTransactionForm from "./AddTransactionForm";
 import { FaSun, FaMoon } from "react-icons/fa"; // Import sun and moon icons
@@ -200,7 +201,7 @@ function Dashboard() {
     {/* Navbar */}
     <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top enhanced-navbar">
       <Navbar.Brand href="/dashboard" className="mx-3">
-        SnayExpTracker
+        StocksPortfolioManagement
       </Navbar.Brand>
       
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -211,10 +212,10 @@ function Dashboard() {
           <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
           <Nav.Link href="/transactions" className="mx-3">Transactions</Nav.Link>
           <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3">Predictions</Nav.Link>
+          <Nav.Link href="/login" className="mx-3">LogOut</Nav.Link>
         </Nav>
         
         <div className="navbar-controls ml-auto">
-          <Nav.Link href="/login" className="mx-3">LogOut</Nav.Link>
           <ToggleButtonGroup
             type="radio"
             name="theme-toggle"
@@ -228,6 +229,17 @@ function Dashboard() {
               {theme === "light" ? <FaMoon /> : <FaSun />}
             </ToggleButton>
           </ToggleButtonGroup>
+          <Dropdown className="ms-3">
+            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+              {user.username}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </Navbar.Collapse>
     </Navbar>
@@ -289,22 +301,27 @@ function Dashboard() {
         <Card.Body>
           <Card.Title>Recent Transactions</Card.Title>
           {transactions.length > 0 ? (
-            <ListGroup>
-              {transactions.map((transaction) => (
-                <ListGroup.Item key={transaction._id}>
-                  {transaction.category}: 
-                  <span 
-                    className={
-                      transaction.type === "income" 
-                        ? "amount-income" 
-                        : "amount-expense"
-                    }
-                  >
-                    ${transaction.amount.toFixed(2)}
-                  </span>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+            <>
+              <ListGroup>
+                {transactions.slice(0, 5).map((transaction) => (
+                  <ListGroup.Item key={transaction._id}>
+                    {transaction.category}: 
+                    <span 
+                      className={
+                        transaction.type === "income" 
+                          ? "amount-income" 
+                          : "amount-expense"
+                      }
+                    >
+                      ${transaction.amount.toFixed(2)}
+                    </span>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+              <Button variant="link" onClick={() => navigate("/transactions")}>
+                View More
+              </Button>
+            </>
           ) : (
             <p>No recent transactions.</p>
           )}

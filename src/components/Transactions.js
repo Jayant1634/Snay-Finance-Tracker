@@ -11,6 +11,7 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   Pagination,
+  Dropdown, // Add Dropdown import
 } from "react-bootstrap";
 import { FaSearch, FaSun, FaMoon, FaSort, FaSortUp, FaSortDown } from "react-icons/fa"; // Importing icons
 import { API_URL } from "../services/api";
@@ -105,7 +106,7 @@ function TransactionsPage() {
       {/* Navbar */}
       <Navbar expand="lg" className={`navbar-custom ${theme}`}>
         <Navbar.Brand href="/dashboard" className="mx-3">
-          ExpenseTracker
+        StocksPortfolioManagement
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -149,6 +150,17 @@ function TransactionsPage() {
               {theme === "light" ? <FaMoon /> : <FaSun />}
             </ToggleButton>
           </ToggleButtonGroup>
+          <Dropdown className="ms-3">
+            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+              {user.username}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Navbar.Collapse>
       </Navbar>
 

@@ -136,6 +136,25 @@ body, html {
     color: #ffffff !important;
 }
 
+.enhanced-navbar .dropdown-toggle {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+.enhanced-navbar .dropdown-menu {
+    background-color: #ffffff;
+    /* ...existing code... */
+}
+.enhanced-navbar .dropdown-item {
+    color: #000000;
+    /* ...existing code... */
+}
+.enhanced-navbar .dropdown-item:hover {
+    background-color: #f0f0f0;
+    /* ...existing code... */
+}
+
 /* Feature Cards */
 .futuristic-card {
     border-radius: 15px;

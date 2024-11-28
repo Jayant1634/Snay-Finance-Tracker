@@ -25,7 +25,7 @@ function LandingPage() {
     <div className={styles.landingPage}>
       <Navbar expand="lg" className={`${styles.navbar} navbar-light fixed-top`}>
         <Container>
-          <Navbar.Brand href="#" className={styles.navbarBrand}>Snay Expense Tracker</Navbar.Brand>
+          <Navbar.Brand href="#" className={styles.navbarBrand}>StocksPortfolioManagement</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-center">

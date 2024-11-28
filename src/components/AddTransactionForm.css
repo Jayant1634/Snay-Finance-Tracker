@@ -1,0 +1,55 @@
+.add-transaction-form {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.add-transaction-form .form-group {
+  margin-bottom: 15px;
+}
+
+/* Add focus states for inputs */
+.add-transaction-form .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+}
+
+/* Improve button styling with hover and transition */
+.add-transaction-form .btn-primary {
+  width: 100%;
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.add-transaction-form .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .add-transaction-form {
+    padding: 15px;
+  }
+
+  .add-transaction-form .btn-primary {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+.form-label {
+    color: #000; /* Set label text color to black */
+}
+
+.form-control {
+    color: #000; /* Set input text color to black */
+}
+
+.btn-primary {
+    color: #fff; /* Ensure button text is white */
+    background-color: #007bff; /* Ensure button background color provides contrast */
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Form, Button, ListGroup, Container } from 'react-bootstrap';
+import { Card, Form, Button, ListGroup, Container, Modal } from 'react-bootstrap';
 import { API_URL } from '../services/api';
 
 function FinancialGoals({ user, displayOnly, onGoalAdded }) {
@@ -8,6 +8,10 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
   const [goalType, setGoalType] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [editingGoal, setEditingGoal] = useState(null);
+  const [editedGoalType, setEditedGoalType] = useState('');
+  const [editedTargetAmount, setEditedTargetAmount] = useState('');
+  const [editedDeadline, setEditedDeadline] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -42,6 +46,29 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
     } catch (err) {
       console.error(err);
       alert('Failed to add goal');
+    }
+  };
+
+  const handleEditGoal = (goal) => {
+    setEditingGoal(goal);
+    setEditedGoalType(goal.goalType);
+    setEditedTargetAmount(goal.targetAmount);
+    setEditedDeadline(goal.deadline);
+  };
+
+  const handleUpdateGoal = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.put(`${API_URL}/goals/${editingGoal._id}`, {
+        goalType: editedGoalType,
+        targetAmount: editedTargetAmount,
+        deadline: editedDeadline,
+      });
+      setGoals(goals.map(goal => goal._id === editingGoal._id ? res.data : goal));
+      setEditingGoal(null);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update goal');
     }
   };
 
@@ -92,8 +119,11 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
           {goals.length > 0 ? (
             <ListGroup>
               {goals.map((goal) => (
-                <ListGroup.Item key={goal._id}>
-                  <strong>{goal.goalType}</strong>: ${goal.targetAmount} by {new Date(goal.deadline).toLocaleDateString()}
+                <ListGroup.Item key={goal._id} className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>{goal.goalType}</strong>: ${goal.targetAmount} by {new Date(goal.deadline).toLocaleDateString()}
+                  </div>
+                  <Button variant="secondary" onClick={() => handleEditGoal(goal)}>Edit</Button>
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -102,6 +132,46 @@ function FinancialGoals({ user, displayOnly, onGoalAdded }) {
           )}
         </Card.Body>
       </Card>
+
+      {editingGoal && (
+        <Modal show onHide={() => setEditingGoal(null)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Goal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleUpdateGoal}>
+              <Form.Group className="mb-3">
+                <Form.Label>Goal Type</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editedGoalType}
+                  onChange={(e) => setEditedGoalType(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Target Amount</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={editedTargetAmount}
+                  onChange={(e) => setEditedTargetAmount(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Deadline</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={editedDeadline}
+                  onChange={(e) => setEditedDeadline(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">Update Goal</Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      )}
     </Container>
   );
 }

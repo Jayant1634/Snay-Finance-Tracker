@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Card, Button, Form } from 'react-bootstrap';
 import { API_URL } from '../services/api';
+import './AddTransactionForm.css';
 
 function AddTransactionForm({ onClose }) {
   const [category, setCategory] = useState('');
@@ -48,8 +49,8 @@ function AddTransactionForm({ onClose }) {
           onChange={(e) => setType(e.target.value)} 
           required
         >
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
+          <option value="expense">Buy</option>
+          <option value="income">Sell</option>
         </Form.Control>
       </Form.Group>
       <Form.Group controlId="formCategory">

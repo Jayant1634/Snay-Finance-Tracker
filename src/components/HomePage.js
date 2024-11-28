@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Navbar, Nav, Card } from 'react-bootstrap';
+import { Container, Button, Row, Col, Navbar, Nav, Card, Dropdown } from 'react-bootstrap';
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
 import './HomePage.module.css';
+
 function HomePage() {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     navigate('/login');
@@ -29,7 +31,7 @@ function HomePage() {
       <Navbar expand="lg" className="fixed-top enhanced-navbar">
         <Container>
           <Navbar.Brand href="/home" className="text-white">
-            SnayExpTracker
+            StocksPortfolioManagement
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -38,9 +40,17 @@ function HomePage() {
               <Nav.Link href="/dashboard" className="mx-3 text-white">Dashboard</Nav.Link>
               <Nav.Link href="/transactions" className="mx-3 text-white">Transactions</Nav.Link>
               <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3 text-white">Predictions</Nav.Link>
-              <Button variant="outline-danger" onClick={handleLogout} className="ms-3 logout-button">
-                Logout
-              </Button>
+              <Dropdown className="ms-3">
+                <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+                  {user.username}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

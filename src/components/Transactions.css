@@ -12,12 +12,17 @@ body.dark .transactions-page {
   color: #e0e0e0;
 }
 
+/* Remove default margin from body */
+body {
+  margin: 0;
+}
+
 /* ================================ */
 /* Navbar Custom Styling */
 /* ================================ */
 /* Ensure there is space between the fixed navbar and the content below */
 .transactions-page {
-  padding-top: 70px; /* Adjust this value if needed */
+  /* padding-top: 70px; */ /* Removed to eliminate extra space */
 }
 
 /* Define a custom style for the navbar, including background, padding, and effects */
@@ -29,6 +34,7 @@ body.dark .transactions-page {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
   z-index: 999;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--navbar-bg-color);
 }
 
 /* Light theme: light-colored background and soft shadow for the navbar */
@@ -51,6 +57,20 @@ body.dark .navbar-custom {
   margin: 0 10px;
   padding: 5px 10px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--navbar-link-color) !important;
+  margin-right: 15px;
+}
+
+.navbar-custom .dropdown-toggle {
+  color: var(--navbar-link-color) !important;
+}
+
+.navbar-custom .dropdown-menu {
+  background-color: var(--dropdown-bg-color);
+}
+
+.navbar-custom .dropdown-item {
+  color: var(--dropdown-item-color) !important;
 }
 
 /* Hover effect for navbar links */
@@ -227,4 +247,33 @@ body.dark .transactions-container .table td {
   .table-description {
       font-size: 0.9rem; /* Smaller text for the paragraph */
   }
+}
+
+.transactions-container {
+  padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-custom .nav-link {
+    margin-right: 10px;
+  }
+  .transactions-container {
+    padding: 10px;
+  }
+}
+
+/* Theme variables */
+:root.light {
+  --navbar-bg-color: #f8f9fa;
+  --navbar-link-color: #000;
+  --dropdown-bg-color: #fff;
+  --dropdown-item-color: #000;
+}
+
+:root.dark {
+  --navbar-bg-color: #343a40;
+  --navbar-link-color: #fff;
+  --dropdown-bg-color: #495057;
+  --dropdown-item-color: #fff;
 }
