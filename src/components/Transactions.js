@@ -106,7 +106,7 @@ function TransactionsPage() {
       {/* Navbar */}
       <Navbar expand="lg" className={`navbar-custom ${theme}`}>
         <Navbar.Brand href="/dashboard" className="mx-3">
-        StocksPortfolioManagement
+        SnayExpTracker
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

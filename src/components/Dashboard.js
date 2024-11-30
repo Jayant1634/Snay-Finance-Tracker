@@ -201,7 +201,7 @@ function Dashboard() {
     {/* Navbar */}
     <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top enhanced-navbar">
       <Navbar.Brand href="/dashboard" className="mx-3">
-        StocksPortfolioManagement
+        SnayExpTracker
       </Navbar.Brand>
       
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

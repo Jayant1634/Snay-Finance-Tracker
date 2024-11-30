@@ -12,7 +12,7 @@ function NavbarComponent() {
     <Navbar expand="lg" className={styles.navbar}>
       <Container>
         <Navbar.Brand href="#" className={styles.navbarBrand}>
-          StocksPortfolioManagement
+          SnayExpTracker
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

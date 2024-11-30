@@ -31,7 +31,7 @@ function HomePage() {
       <Navbar expand="lg" className="fixed-top enhanced-navbar">
         <Container>
           <Navbar.Brand href="/home" className="text-white">
-            StocksPortfolioManagement
+            SnayExpTracker
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -135,7 +135,7 @@ function HomePage() {
 {/* Footer Section */}
 <footer className="footer-section text-center py-3">
         <Container>
-          <p>Made by Snay Corporation </p>
+          <p>Made by Snay Corporation | Owner : Jayant Khandelwal</p>
         </Container>
       </footer>
       

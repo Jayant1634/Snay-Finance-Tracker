@@ -83,7 +83,7 @@ function LandingPage() {
 
       <footer className={`${styles.footerSection} text-center py-3`}>
         <Container className={styles.footcont}>
-          <p>Made by Snay Corporation </p>
+          <p>Made by Snay Corporation | Owner : Jayant Khandelwal</p>
         </Container>
       </footer>
     </div>
