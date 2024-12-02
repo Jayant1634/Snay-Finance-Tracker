@@ -95,3 +95,4 @@ export default LandingPage;
 /* Changes in LandingPage.js */
 
 /* No additional changes needed as feature card sizes and spacing are handled via CSS */
+ 
