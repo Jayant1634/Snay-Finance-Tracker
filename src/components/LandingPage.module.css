@@ -65,6 +65,7 @@ body, html {
 
 /* Hero Section */
 .heroSection {
+  padding-top: 0; /* Ensure no top padding */
   background: transparent;
   color: #ecf0f1;
   position: relative;
@@ -236,4 +237,9 @@ body, html {
 /* Adjust Log In Button for Secondary Variant */
 .loginButton {
   /* Optional: Customize if needed */
+}
+
+/* Added padding to offset the fixed navbar height */
+.landingPage {
+  padding-top: 80px; /* Increased from 70px to 80px to match navbar height */
 }

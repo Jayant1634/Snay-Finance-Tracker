@@ -1,0 +1,17 @@
+.navbar {
+  position: fixed; /* Ensure the navbar is fixed */
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Increased opacity for better transparency */
+  backdrop-filter: blur(10px); /* Apply blur for a modern look */
+  margin-bottom: 0; /* Removed extra space */
+  z-index: 1000; /* Ensure the navbar stays on top */
+}
+
+.navbar .nav-link {
+  margin-right: 15px;
+}
+
+.navbar .btn {
+  height: 38px;
+}
