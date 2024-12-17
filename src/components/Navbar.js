@@ -1,31 +1,28 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-function AppNavbar() {
-  const navigate = useNavigate();
-
-  const handleLogin = () => navigate('/login');
-  const handleSignup = () => navigate('/register');
-
+function AppNavbar({ onHomeClick, onDashboardClick, onProfileClick }) {
   return (
-    <Navbar bg="light" expand="lg" className={styles.navbar}>
+    <Navbar className={`${styles.navbar} fixed-top`} expand="lg" style={{ fontSize: '1.2rem', color: 'white' }}>
       <Container>
-        <Navbar.Brand href="/">Finance Tracker</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className={styles.navbarBrand}>SnayExpTracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            <Button variant="primary" className="ms-2" onClick={handleSignup}>
+          <Nav className={`${styles.nav} ms-auto align-items-center`}>
+            <Nav.Link onClick={onHomeClick} className="flex-fill text-center">Home</Nav.Link>
+            <Nav.Link onClick={onDashboardClick} className="flex-fill text-center">Dashboard</Nav.Link>
+            <Nav.Link onClick={onProfileClick} className="flex-fill text-center">Profile</Nav.Link>
+          </Nav>
+          <div className="d-flex ms-auto">
+            <Button variant="primary" className="ms-2" onClick={onHomeClick}>
               Sign Up
             </Button>
-            <Button variant="secondary" className="ms-2" onClick={handleLogin}>
+            <Button variant="secondary" className="ms-2" onClick={onHomeClick}>
               Log In
             </Button>
-          </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

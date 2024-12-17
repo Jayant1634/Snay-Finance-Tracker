@@ -5,13 +5,16 @@ import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
 import styles from './LandingPage.module.css';
-import Navbar from './Navbar'; // Import the Navbar component
+import Navbar from './Navbar'; // Ensure Navbar is imported
 
 function LandingPage() {
   const navigate = useNavigate();
 
   const redirectToSignup = () => navigate('/register');
   const redirectToLogin = () => navigate('/login');
+  const redirectToHome = () => navigate('/login');
+  const redirectToDashboard = () => navigate('/login');
+  const redirectToProfile = () => navigate('/login');
 
   const defaultOptions = {
     loop: true,
@@ -24,7 +27,7 @@ function LandingPage() {
 
   return (
     <div className={styles.landingPage}>
-      <Navbar /> {/* Insert the Navbar component */}
+      <Navbar onHomeClick={redirectToHome} onDashboardClick={redirectToDashboard} onProfileClick={redirectToProfile} />
       
       <div className={styles.heroSection}>
         <Container className="d-flex align-items-center vh-100">

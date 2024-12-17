@@ -2,16 +2,38 @@
   position: fixed; /* Ensure the navbar is fixed */
   top: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Increased opacity for better transparency */
+  background-color: rgba(33, 33, 33, 0.105); /* Increase transparency */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px); /* Apply blur for a modern look */
   margin-bottom: 0; /* Removed extra space */
   z-index: 1000; /* Ensure the navbar stays on top */
+  height: 70px; /* Increase height */
+  padding: 0; /* Remove extra padding */
+}
+
+.navbar .navbar-brand {
+  font-size: 28px; /* Increase brand name size */
+  color: white; /* Set color to white */
 }
 
 .navbar .nav-link {
   margin-right: 15px;
+  font-size: 20px; /* Increase font size */
+  color: white !important; /* Set color to white */
+  flex: 1; /* Ensure links are equally spaced */
+  text-align: center; /* Center align text */
+  justify-content: space-evenly;
+
 }
 
 .navbar .btn {
-  height: 38px;
+  height: 40px;
+  font-size: 18px; /* Increase font size */
+  color: white; /* Set color to white */
+  border-radius: 0; /* Ensure buttons are equally shaped */
+}
+.navbar .nav {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-evenly;
 }
