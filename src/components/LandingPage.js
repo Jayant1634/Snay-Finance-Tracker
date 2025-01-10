@@ -115,7 +115,7 @@ function LandingPage() {
       <footer className={styles.footerSection}>
         <Container>
           <p className={styles.footcont}>
-            © 2024 FinanceTracker by Snay Corporation | Made with ❤️ by Jayant Khandelwal
+            © 2024 FinanceTracker by Snay Corporation | Made by Jayant Khandelwal
           </p>
         </Container>
       </footer>
