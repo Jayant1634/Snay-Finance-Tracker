@@ -1,40 +1,57 @@
 import React from 'react';
 import { Navbar as BootstrapNavbar, Nav, Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-function Navbar({ onHomeClick, onDashboardClick, onProfileClick }) {
+function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
   return (
-    <BootstrapNavbar className={styles.navbar} expand="lg">
+    <BootstrapNavbar className={styles.navbar} expand="lg" fixed="top">
       <Container>
-        <BootstrapNavbar.Brand as={Link} to="/" className={styles.navBrand}>
-          FinanceTracker
+        <BootstrapNavbar.Brand 
+          onClick={() => navigate('/')} 
+          className={styles.navBrand}
+          style={{ cursor: 'pointer' }}
+        >
+          SnayExpTracker
         </BootstrapNavbar.Brand>
+        
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+        
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/" className={styles.navLink}>
+          <Nav className="mx-auto">
+            <Nav.Link 
+              onClick={() => navigate('/')}
+              className={`${styles.navLink} ${location.pathname === '/' ? styles.active : ''}`}
+            >
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/features" className={styles.navLink}>
+            <Nav.Link 
+              onClick={() => navigate('/features')}
+              className={`${styles.navLink} ${location.pathname === '/features' ? styles.active : ''}`}
+            >
               Features
             </Nav.Link>
-            <Nav.Link as={Link} to="/about" className={styles.navLink}>
+            <Nav.Link 
+              onClick={() => navigate('/about')}
+              className={`${styles.navLink} ${location.pathname === '/about' ? styles.active : ''}`}
+            >
               About
             </Nav.Link>
           </Nav>
+          
           <div className={styles.authButtons}>
             <Button
-              as={Link}
-              to="/login"
+              onClick={() => navigate('/login')}
               variant="outline-primary"
               className={styles.loginButton}
             >
               Log In
             </Button>
             <Button
-              as={Link}
-              to="/register"
+              onClick={() => navigate('/register')}
               variant="primary"
               className={styles.signupButton}
             >

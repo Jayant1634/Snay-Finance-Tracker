@@ -13,6 +13,8 @@ import LandingPage from './components/LandingPage';
 import Transactions from './components/Transactions';
 import HomePage from './components/HomePage';
 import Profile from './components/Profile/Profile';
+import Features from './components/Features';
+import About from './components/About';
 
 function App() {
   return (
@@ -32,7 +34,8 @@ function App() {
           <Route path="/transactions" element={<Transactions/>} />          
           <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} /> {/* Added Profile Route */}
-
+          <Route path="/features" element={<Features />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     </Router>

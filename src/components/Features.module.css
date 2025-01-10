@@ -1,0 +1,81 @@
+.featuresPage {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.featuresContent {
+  padding-top: 80px;
+}
+
+.pageHeader {
+  text-align: center;
+  padding: 4rem 0;
+  background: #f8fafc;
+  margin-bottom: 3rem;
+}
+
+.pageHeader h1 {
+  font-size: 2.5rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.pageHeader p {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.featuresList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.featureCard {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  color: #3b82f6;
+  margin-bottom: 1.5rem;
+}
+
+.featureCard h2 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.featureCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.featureCard ul li {
+  color: #475569;
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.featureCard ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+} 
