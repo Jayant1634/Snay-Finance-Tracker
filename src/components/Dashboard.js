@@ -194,53 +194,40 @@ function Dashboard() {
 
 
   return (
-    <div className={theme}>
+    <div className="dashboard-container">
     {/* Render Particles */}
     {particles}
 
     {/* Navbar */}
-    <Navbar bg={theme} variant={theme} expand="lg" className="mb-4 fixed-top enhanced-navbar">
-      <Navbar.Brand href="/dashboard" className="mx-3">
-        SnayExpTracker
-      </Navbar.Brand>
-      
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="navbar-nav">
-          <Nav.Link href="/home" className="mx-3">Home</Nav.Link>
-          <Nav.Link href="/dashboard" className="mx-3">Dashboard</Nav.Link>
-          <Nav.Link href="/transactions" className="mx-3">Transactions</Nav.Link>
-          <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3">Predictions</Nav.Link>
-          <Nav.Link href="/login" className="mx-3">LogOut</Nav.Link>
-        </Nav>
+    <Navbar expand="lg" className="mb-4 fixed-top enhanced-navbar">
+      <Container>
+        <Navbar.Brand href="/dashboard">
+          SnayExpTracker
+        </Navbar.Brand>
         
-        <div className="navbar-controls ml-auto">
-          <ToggleButtonGroup
-            type="radio"
-            name="theme-toggle"
-            className="ml-3"
-          >
-            <ToggleButton
-              variant="outline-secondary"
-              onClick={handleThemeToggle}
-              value={theme}
-            >
-              {theme === "light" ? <FaMoon /> : <FaSun />}
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <Dropdown className="ms-3">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="navbar-nav">
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/transactions">Transactions</Nav.Link>
+            <Nav.Link href="https://expenseandstocks.streamlit.app">Predictions</Nav.Link>
+          </Nav>
+          
+          <Dropdown>
             <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
               {user.username}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-
-              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>
+                Logout
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        </div>
-      </Navbar.Collapse>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
 
 

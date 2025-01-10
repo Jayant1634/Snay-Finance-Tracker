@@ -1,279 +1,252 @@
-/* ================================ */
-/* General Light and Dark Modes */
-/* ================================ */
-/* Set background and text colors for light and dark themes on the transactions page */
-body.light .transactions-page {
-  background-color: #f5f5f5;
-  color: #333;
-}
-
-body.dark .transactions-page {
-  background-color: #2a2a2a;
-  color: #e0e0e0;
-}
-
-/* Remove default margin from body */
-body {
-  margin: 0;
-}
-
-/* ================================ */
-/* Navbar Custom Styling */
-/* ================================ */
-/* Ensure there is space between the fixed navbar and the content below */
+/* Base styles */
 .transactions-page {
-  /* padding-top: 70px; */ /* Removed to eliminate extra space */
+  min-height: 100vh;
+  background: #ffffff;
 }
 
-/* Define a custom style for the navbar, including background, padding, and effects */
+/* Navbar */
 .navbar-custom {
-  background: rgba(39, 39, 39, 0.879) !important;
-  padding: 10px;
-  color: white;
-  backdrop-filter: blur(8px); /* Apply a blur effect */
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
-  z-index: 999;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  background-color: var(--navbar-bg-color);
+  background: #1e293b !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 2rem !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-/* Light theme: light-colored background and soft shadow for the navbar */
-body.light .navbar-custom {
-  background-color: rgba(27, 26, 26, 0.332) !important;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark theme: dark-colored background for the navbar */
-body.dark .navbar-custom {
-  background-color: rgba(30, 30, 30, 0.95) !important;
-}
-
-/* ================================ */
-/* Navbar Links */
-/* ================================ */
-/* Style the navbar links with transition effects */
-.navbar-custom .nav-link {
-  color: inherit !important; /* Inherit color based on the theme */
-  margin: 0 10px;
-  padding: 5px 10px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: var(--navbar-link-color) !important;
-  margin-right: 15px;
-}
-
-.navbar-custom .dropdown-toggle {
-  color: var(--navbar-link-color) !important;
-}
-
-.navbar-custom .dropdown-menu {
-  background-color: var(--dropdown-bg-color);
-}
-
-.navbar-custom .dropdown-item {
-  color: var(--dropdown-item-color) !important;
-}
-
-/* Hover effect for navbar links */
-.navbar-custom .nav-link:hover {
-  background-color: rgba(54, 162, 235, 0.1); /* Light blue background */
-  border-radius: 4px; /* Slightly rounded corners */
-}
-
-/* ================================ */
-/* Navbar Brand */
-/* ================================ */
-/* Customize the brand/logo in the navbar */
 .navbar-custom .navbar-brand {
-  font-weight: bold;
+  color: #ffffff !important;
   font-size: 1.5rem;
-  color: #0056b3; /* Blue color for the brand */
-  transition: color 0.3s ease;
+  font-weight: 600;
+  margin-right: 3rem;
+  background: linear-gradient(45deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Change color on hover for navbar brand */
-.navbar-custom .navbar-brand:hover {
-  color: #004080; /* Darker blue on hover */
+.navbar-custom .navbar-nav {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* ================================ */
-/* Search Bar Styling */
-/* ================================ */
-/* General style for search input field */
-.transactions-page .form-control {
-  border-radius: 0; /* No rounded corners */
-  padding: 4px 12px;
-  border: 1px solid #ddd;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.navbar-custom .nav-link {
+  color: #e2e8f0 !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Dark theme: dark background for the search bar */
-body.dark .transactions-page .form-control {
-  background-color: #44444436;
-  color: #e0e0e0;
-  border: 1px solid #666;
+.navbar-custom .nav-link:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
 }
 
-/* Light theme: light background for the search bar */
-body.light .transactions-page .form-control {
-  background-color: #bbb9b900;
-  color: #212529;
-  border: 1px solid #ced4da;
+/* User Dropdown */
+.user-dropdown {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #e2e8f0 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-/* ================================ */
-/* Button Styling */
-/* ================================ */
-/* Style for general buttons, including hover effects */
-.transactions-page .btn {
-  border-radius: 0; /* No rounded corners */
-  padding: 4px 10px;
-  background-color: transparent;
-  border: 1px solid currentColor;
-  color: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.user-dropdown:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
 }
 
-/* Style specific to outline-secondary button variant */
-.transactions-page .btn-outline-secondary {
-  color: #0056b3;
-  border-color: #0056b3;
+.user-dropdown:focus,
+.user-dropdown:active {
+  box-shadow: none !important;
+  background: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Change color on hover for buttons */
-.transactions-page .btn-outline-secondary:hover {
-  background-color: #0056b3;
-  color: #fff;
+/* Dropdown Menu */
+.dropdown-menu {
+  background: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
 }
 
-/* ================================ */
-/* Toggle Button Group */
-/* ================================ */
-/* Style for toggle buttons used to switch themes */
-.transactions-page .toggle-button-group .btn {
-  border-radius: 0;
-  padding: 4px 10px;
-  background-color: transparent;
-  border: 1px solid currentColor;
-  color: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.dropdown-item {
+  color: #e2e8f0 !important;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
 }
 
-/* ================================ */
-/* Paragraph Styling */
-/* ================================ */
-/* Style for the paragraph providing context above the transactions table */
-.table-description {
-  font-size: 1rem;
-  color: #555;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
 }
 
-/* ================================ */
-/* Table Styling */
-/* ================================ */
-/* Basic styling for the transactions table */
-.transactions-container .table {
-  margin-top: 20px;
-  background-color: #fff;
-  color: #333;
-  border-collapse: collapse; /* Remove spacing between cells */
-}
-
-/* General styling for table header and cells */
-.transactions-container .table th,
-.transactions-container .table td {
-  text-align: center;
-  vertical-align: middle;
-  padding: 8px;
-}
-
-/* Dark theme: dark background for the table */
-body.dark .transactions-container .table {
-  background-color: #333;
-  color: #e0e0e0;
-}
-
-/* Dark theme: darker borders for table cells */
-body.dark .transactions-container .table th,
-body.dark .transactions-container .table td {
-  border-color: #444;
-}
-
-/* ================================ */
-/* Pagination Styling */
-/* ================================ */
-/* Style for pagination controls */
-.transactions-page .pagination .page-link {
-  color: #0056b3;
-  border-radius: 50%; /* Rounded page buttons */
-  padding: 4px 10px;
-  margin: 0 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Active page button styling */
-.transactions-page .pagination .page-item.active .page-link {
-  background-color: #0056b3;
-  color: #fff;
-  border-color: #0056b3;
-}
-
-/* Hover effect for pagination links */
-.transactions-page .pagination .page-link:hover {
-  background-color: rgba(0, 86, 179, 0.15); /* Light blue on hover */
-  color: #0056b3;
-}
-
-/* ================================ */
-/* Media Query for Responsive Adjustments */
-/* ================================ */
-/* Adjust font sizes and paddings for smaller screens */
-@media (max-width: 576px) {
-  .transactions-page .navbar-brand {
-      font-size: 1.4rem; /* Smaller font for the brand name */
+/* Mobile Responsive */
+@media (max-width: 991px) {
+  .navbar-custom {
+    padding: 0.75rem 1rem !important;
   }
 
-  .transactions-page .form-control {
-      padding: 8px 10px; /* More padding for better touch support */
+  .navbar-custom .navbar-collapse {
+    background: #1e293b;
+    padding: 1rem;
+    margin: 0.5rem -1rem -0.75rem;
+    border-radius: 0 0 8px 8px;
   }
 
-  .transactions-page .table th,
-  .transactions-page .table td {
-      font-size: 0.9rem; /* Smaller text for table cells */
+  .navbar-custom .navbar-nav {
+    gap: 0.5rem;
   }
 
-  .table-description {
-      font-size: 0.9rem; /* Smaller text for the paragraph */
-  }
-}
-
-.transactions-container {
-  padding: 20px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
   .navbar-custom .nav-link {
-    margin-right: 10px;
+    padding: 0.75rem 1rem !important;
   }
-  .transactions-container {
-    padding: 10px;
+
+  .user-dropdown {
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: left;
   }
 }
 
-/* Theme variables */
-:root.light {
-  --navbar-bg-color: #f8f9fa;
-  --navbar-link-color: #000;
-  --dropdown-bg-color: #fff;
-  --dropdown-item-color: #000;
+/* Main Content */
+.main-content {
+  padding-top: 56px;
 }
 
-:root.dark {
-  --navbar-bg-color: #343a40;
-  --navbar-link-color: #fff;
-  --dropdown-bg-color: #495057;
-  --dropdown-item-color: #fff;
+.page-header {
+  background: #f8fafc;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.content-wrapper {
+  padding: 2rem;
+}
+
+/* Filters */
+.filters {
+  margin-bottom: 2rem;
+}
+
+.filters .form-control,
+.filters .form-select {
+  height: 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+/* Table */
+.table-wrapper {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Transaction badges */
+.transaction-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badge-income {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-expense {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Amount styling */
+.amount-income {
+  color: #15803d;
+  font-weight: 500;
+}
+
+.amount-expense {
+  color: #b91c1c;
+  font-weight: 500;
+}
+
+/* Action button */
+.action-button {
+  background: #2563eb;
+  border: none;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.delete-button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  background: #fee2e2;
+  border: none;
+  color: #b91c1c;
+}
+
+/* Pagination */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pagination .page-link {
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  margin: 0 2px;
+}
+
+.pagination .active .page-link {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
 }

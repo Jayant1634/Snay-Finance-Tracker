@@ -1,20 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col, Card } from 'react-bootstrap'; // Removed Navbar and Nav imports
-import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
+import { Container, Button, Row, Col, Card } from 'react-bootstrap';
+import { FaChartBar, FaRegClock, FaShieldAlt } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
 import styles from './LandingPage.module.css';
-import Navbar from './Navbar'; // Ensure Navbar is imported
+import Navbar from './Navbar';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LandingPage() {
   const navigate = useNavigate();
 
   const redirectToSignup = () => navigate('/register');
   const redirectToLogin = () => navigate('/login');
-  const redirectToHome = () => navigate('/login');
-  const redirectToDashboard = () => navigate('/login');
-  const redirectToProfile = () => navigate('/login');
 
   const defaultOptions = {
     loop: true,
@@ -25,68 +24,99 @@ function LandingPage() {
     }
   };
 
+  const features = [
+    {
+      icon: <FaChartBar />,
+      title: 'Financial Analytics',
+      text: 'Get detailed insights into your spending patterns with interactive charts and reports.',
+      btnText: 'Learn More'
+    },
+    {
+      icon: <FaRegClock />,
+      title: 'Real-time Tracking',
+      text: 'Monitor your expenses and income in real-time with automatic categorization.',
+      btnText: 'Start Tracking'
+    },
+    {
+      icon: <FaShieldAlt />,
+      title: 'Secure & Private',
+      text: 'Your financial data is protected with enterprise-grade security measures.',
+      btnText: 'View Security'
+    }
+  ];
+
   return (
     <div className={styles.landingPage}>
-      <Navbar onHomeClick={redirectToHome} onDashboardClick={redirectToDashboard} onProfileClick={redirectToProfile} />
+      <Navbar />
       
-      <div className={styles.heroSection}>
-        <Container className="d-flex align-items-center vh-100">
-          <Row className="w-100 align-items-center">
-            <Col md={6} className="text-left order-md-1 order-2">
-              <h1 className={styles.heroTitle}>Track Your Expense Effortlessly</h1>
-              <p className={styles.heroSubtitle}>Gain full control of your finances with real-time insights.</p>
-              <div className={`${styles.buttonGroup} d-flex justify-content-end`}>
-                <Button onClick={redirectToSignup} variant="primary" className={`${styles.signupButton} mt-3`}>
-                  Sign Up
-                </Button>
-                <Button onClick={redirectToLogin} variant="secondary" className={`${styles.loginButton} mt-3 ms-3`}>
-                  Log In
-                </Button>
-              </div>
-              <div className={styles.arrowDown}></div>
-            </Col>
-            <Col md={6} className="order-md-2 order-1">
-              <Lottie options={defaultOptions} height="100%" width="100%" />
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <main>
+        <section className={styles.heroSection}>
+          <Container fluid="lg">
+            <Row className={styles.heroRow}>
+              <Col lg={6} className={styles.heroContent}>
+                <h1 className={styles.heroTitle}>
+                  Manage Your Finances with Confidence
+                </h1>
+                <p className={styles.heroSubtitle}>
+                  Take control of your financial future with our comprehensive expense tracking and analytics platform.
+                </p>
+                <div className={styles.buttonGroup}>
+                  <Button 
+                    onClick={redirectToSignup} 
+                    className={`${styles.signupButton} btn`}
+                  >
+                    Get Started Free
+                  </Button>
+                  <Button 
+                    onClick={redirectToLogin} 
+                    variant="outline-primary"
+                    className={`${styles.loginButton} btn`}
+                  >
+                    Sign In
+                  </Button>
+                </div>
+              </Col>
+              <Col lg={6} className={styles.heroAnimation}>
+                <div className={styles.animationWrapper}>
+                  <Lottie options={defaultOptions} />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
 
-      <Container className={`${styles.featureCardsSection} my-5`}>
-        <Row className="justify-content-center">
-          {[{
-            icon: <FaWallet />,
-            title: 'Manage Transactions',
-            text: 'Add, view, and filter your daily expenses and incomes in a simple, intuitive interface.',
-            btnText: 'View Transactions'
-          }, {
-            icon: <FaChartLine />,
-            title: 'Dashboard Overview',
-            text: 'Get a quick overview of your current balance and spending patterns in the dashboard.',
-            btnText: 'Go to Dashboard'
-          }, {
-            icon: <FaLightbulb />,
-            title: 'Expense Predictions',
-            text: 'Use advanced algorithms to predict your future expenses and plan ahead.',
-            btnText: 'See Predictions'
-          }].map((feature, idx) => (
-            <Col xs={12} sm={6} md={4} className="mb-4" key={idx}>
-              <Card className={styles.featureCard}>
-                <Card.Body>
-                  <div className={styles.featureIcon}>{feature.icon}</div>
-                  <Card.Title>{feature.title}</Card.Title>
-                  <Card.Text>{feature.text}</Card.Text>
-                  <Button variant="primary" onClick={redirectToLogin} className="mt-3">{feature.btnText}</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+        <section className={styles.featureCardsSection}>
+          <Container>
+            <h2 className={styles.sectionTitle}>Why Choose Us</h2>
+            <Row>
+              {features.map((feature, idx) => (
+                <Col md={4} className={styles.featureCol} key={idx}>
+                  <Card className={styles.featureCard}>
+                    <Card.Body>
+                      <div className={styles.featureIcon}>{feature.icon}</div>
+                      <Card.Title className={styles.featureTitle}>{feature.title}</Card.Title>
+                      <Card.Text className={styles.featureText}>{feature.text}</Card.Text>
+                      <Button 
+                        variant="primary" 
+                        onClick={redirectToSignup}
+                        className={styles.featureButton}
+                      >
+                        {feature.btnText}
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+      </main>
 
-      <footer className={`${styles.footerSection} text-center py-3`}>
-        <Container className={styles.footcont}>
-          <p>Made by Snay Corporation | Owner : Jayant Khandelwal</p>
+      <footer className={styles.footerSection}>
+        <Container>
+          <p className={styles.footcont}>
+            © 2024 FinanceTracker by Snay Corporation | Made with ❤️ by Jayant Khandelwal
+          </p>
         </Container>
       </footer>
     </div>

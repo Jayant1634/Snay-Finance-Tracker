@@ -4,7 +4,7 @@ import { Container, Button, Row, Col, Navbar, Nav, Card, Dropdown } from 'react-
 import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
-import './HomePage.module.css';
+import './HomePage.css';
 
 function HomePage() {
   const navigate = useNavigate();

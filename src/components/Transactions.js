@@ -12,8 +12,11 @@ import {
   ToggleButton,
   Pagination,
   Dropdown, // Add Dropdown import
+  Badge,
+  Row,
+  Col,
 } from "react-bootstrap";
-import { FaSearch, FaSun, FaMoon, FaSort, FaSortUp, FaSortDown } from "react-icons/fa"; // Importing icons
+import { FaSearch, FaSun, FaMoon, FaSort, FaSortUp, FaSortDown, FaPlus, FaFilter } from "react-icons/fa"; // Importing icons
 import { API_URL } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./Transactions.css";
@@ -21,12 +24,10 @@ import "./Transactions.css";
 function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [transactionsPerPage] = useState(10);
-  const [sortField, setSortField] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc"); // "asc" or "desc"
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -38,28 +39,6 @@ function TransactionsPage() {
     fetchTransactions();
   }, [user]);
 
-  useEffect(() => {
-    setFilteredTransactions(
-      transactions
-        .filter((transaction) =>
-          transaction.category.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .sort((a, b) => {
-          if (sortField) {
-            const isAsc = sortOrder === "asc";
-            if (a[sortField] < b[sortField]) {
-              return isAsc ? -1 : 1;
-            }
-            if (a[sortField] > b[sortField]) {
-              return isAsc ? 1 : -1;
-            }
-            return 0;
-          }
-          return 0;
-        })
-    );
-  }, [searchTerm, transactions, sortField, sortOrder]);
-
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(API_URL + `/transactions/${user.id}`);
@@ -69,162 +48,155 @@ function TransactionsPage() {
     }
   };
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  // Filter transactions based on search and filters
+  const filteredTransactions = transactions.filter(transaction => {
+    const matchesSearch = transaction.category.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         (transaction.description && transaction.description.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesType = typeFilter ? transaction.type === typeFilter : true;
+    const matchesCategory = categoryFilter ? transaction.category === categoryFilter : true;
+    
+    return matchesSearch && matchesType && matchesCategory;
+  });
 
-  const handleThemeToggle = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.body.className = newTheme;
-  };
+  // Get unique categories for filter dropdown
+  const categories = [...new Set(transactions.map(t => t.category))];
 
-  const handleSort = (field) => {
-    const order = sortField === field && sortOrder === "asc" ? "desc" : "asc";
-    setSortField(field);
-    setSortOrder(order);
-  };
-
+  // Pagination
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-  const currentTransactions = filteredTransactions.slice(
-    indexOfFirstTransaction,
-    indexOfLastTransaction
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const totalPages = Math.ceil(filteredTransactions.length / transactionsPerPage);
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
 
   return (
-    <div className={`transactions-page ${theme}`}>
-      {/* Navbar */}
-      <Navbar expand="lg" className={`navbar-custom ${theme}`}>
-        <Navbar.Brand href="/dashboard" className="mx-3">
-        SnayExpTracker
+    <div className="transactions-page">
+      <Navbar expand="lg" className="navbar-custom">
+        <Navbar.Brand href="/dashboard">
+          SnayExpTracker
         </Navbar.Brand>
+        
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/home" className="mx-3">
-              Home
-            </Nav.Link>
-            <Nav.Link href="/dashboard" className="mx-3">
-              Dashboard
-            </Nav.Link>
-            <Nav.Link href="/transactions" className="mx-3">
-              Transactions
-            </Nav.Link>
-            <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3">
-              Predictions
-            </Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/transactions">Transactions</Nav.Link>
+            <Nav.Link href="https://expenseandstocks.streamlit.app">Predictions</Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search Transactions"
-              className="me-2"
-              aria-label="Search"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <Button variant="outline-secondary">
-              <FaSearch />
-            </Button>
-          </Form>
-          <ToggleButtonGroup
-            type="radio"
-            name="theme-toggle"
-            className="ms-3"
-          >
-            <ToggleButton
-              variant="outline-secondary"
-              onClick={handleThemeToggle}
-              value={theme}
-            >
-              {theme === "light" ? <FaMoon /> : <FaSun />}
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <Dropdown className="ms-3">
-            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+          
+          <Dropdown>
+            <Dropdown.Toggle className="user-dropdown">
               {user.username}
             </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-
-              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
+            <Dropdown.Menu align="end">
+              <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>
+                Logout
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Collapse>
       </Navbar>
 
-      {/* Paragraph Above Table */}
-      <Container className={`transactions-container ${theme}`}>
-        
+      <div className="main-content">
+        <div className="page-header">
+          <h1>Transactions</h1>
+        </div>
 
-        <h2 className="my-4 text-center">All Transactions</h2>
-        <p className="table-description text-center my-3">
-          Below is a detailed overview of your recent transactions. Use the search feature or pagination to navigate through the records efficiently.
-        </p>
-        <Table striped bordered hover variant={theme}>
-          <thead>
-            <tr>
-              <th onClick={() => handleSort("_id")}>
-                # {sortField === "_id" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
-              </th>
-              <th onClick={() => handleSort("category")}>
-                Category {sortField === "category" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
-              </th>
-              <th onClick={() => handleSort("type")}>
-                Type {sortField === "type" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
-              </th>
-              <th onClick={() => handleSort("amount")}>
-                Amount {sortField === "amount" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
-              </th>
-              <th onClick={() => handleSort("date")}>
-                Date {sortField === "date" && (sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />)}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentTransactions.length > 0 ? (
-              currentTransactions.map((transaction, index) => (
-                <tr key={transaction._id}>
-                  <td>{indexOfFirstTransaction + index + 1}</td>
-                  <td>{transaction.category}</td>
-                  <td>{transaction.type}</td>
-                  <td>${transaction.amount.toFixed(2)}</td>
-                  <td>{new Date(transaction.date).toLocaleDateString()}</td>
+        <div className="content-wrapper">
+          {/* Filters */}
+          <div className="filters">
+            <Row className="g-3">
+              <Col md={4}>
+                <Form.Control
+                  type="text"
+                  placeholder="Search transactions..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </Col>
+              <Col md={4}>
+                <Form.Select 
+                  value={typeFilter}
+                  onChange={(e) => setTypeFilter(e.target.value)}
+                >
+                  <option value="">All Types</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </Form.Select>
+              </Col>
+              <Col md={4}>
+                <Form.Select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                >
+                  <option value="">All Categories</option>
+                  {categories.map(category => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
+            </Row>
+          </div>
+
+          {/* Table */}
+          <div className="table-wrapper">
+            <Table hover>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                  <th>Actions</th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="text-center">
-                  No transactions found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+              </thead>
+              <tbody>
+                {currentTransactions.map((transaction) => (
+                  <tr key={transaction._id}>
+                    <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                    <td>
+                      <span className={`transaction-badge badge-${transaction.type}`}>
+                        {transaction.type}
+                      </span>
+                    </td>
+                    <td>{transaction.category}</td>
+                    <td className={`amount-${transaction.type}`}>
+                      ${transaction.amount.toFixed(2)}
+                    </td>
+                    <td>{transaction.description || '-'}</td>
+                    <td>
+                      <Button 
+                        className="delete-button"
+                        size="sm"
+                        onClick={() => {/* delete handler */}}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
 
-        {/* Pagination */}
-        <Pagination className="justify-content-center">
-          {pageNumbers.map((number) => (
-            <Pagination.Item
-              key={number}
-              active={number === currentPage}
-              onClick={() => paginate(number)}
-            >
-              {number}
-            </Pagination.Item>
-          ))}
-        </Pagination>
-      </Container>
+          {/* Pagination */}
+          <div className="pagination-wrapper">
+            <Pagination>
+              {Array.from({ length: Math.ceil(filteredTransactions.length / transactionsPerPage) }).map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+            </Pagination>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

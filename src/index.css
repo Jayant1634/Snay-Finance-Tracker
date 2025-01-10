@@ -86,3 +86,17 @@ code {
   justify-content: space-between;
   width: 100%; /* Ensure the navbar takes full width */
 }
+
+/* CSS Reset for components */
+[class*="dashboard-"],
+[class*="home-"],
+[class*="landing-"] {
+  all: revert;
+}
+
+/* Ensure components don't inherit unwanted styles */
+.dashboard-container,
+.home-page-bg,
+.landing-page {
+  isolation: isolate;
+}

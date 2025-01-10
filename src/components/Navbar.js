@@ -1,32 +1,50 @@
 import React from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Navbar as BootstrapNavbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-function AppNavbar({ onHomeClick, onDashboardClick, onProfileClick }) {
+function Navbar({ onHomeClick, onDashboardClick, onProfileClick }) {
   return (
-    <Navbar className={`${styles.navbar} fixed-top`} expand="lg" style={{ fontSize: '1.2rem', color: 'white' }}>
+    <BootstrapNavbar className={styles.navbar} expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/" className={styles.navbarBrand}>SnayExpTracker</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className={`${styles.nav} ms-auto align-items-center`}>
-            <Nav.Link onClick={onHomeClick} className="flex-fill text-center">Home</Nav.Link>
-            <Nav.Link onClick={onDashboardClick} className="flex-fill text-center">Dashboard</Nav.Link>
-            <Nav.Link onClick={onProfileClick} className="flex-fill text-center">Profile</Nav.Link>
+        <BootstrapNavbar.Brand as={Link} to="/" className={styles.navBrand}>
+          FinanceTracker
+        </BootstrapNavbar.Brand>
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+        <BootstrapNavbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/" className={styles.navLink}>
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/features" className={styles.navLink}>
+              Features
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about" className={styles.navLink}>
+              About
+            </Nav.Link>
           </Nav>
-          <div className="d-flex ms-auto">
-            <Button variant="primary" className="ms-2" onClick={onHomeClick}>
-              Sign Up
-            </Button>
-            <Button variant="secondary" className="ms-2" onClick={onHomeClick}>
+          <div className={styles.authButtons}>
+            <Button
+              as={Link}
+              to="/login"
+              variant="outline-primary"
+              className={styles.loginButton}
+            >
               Log In
             </Button>
+            <Button
+              as={Link}
+              to="/register"
+              variant="primary"
+              className={styles.signupButton}
+            >
+              Sign Up
+            </Button>
           </div>
-        </Navbar.Collapse>
+        </BootstrapNavbar.Collapse>
       </Container>
-    </Navbar>
+    </BootstrapNavbar>
   );
 }
 
-export default AppNavbar;
+export default Navbar;
