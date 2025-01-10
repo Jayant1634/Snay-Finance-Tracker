@@ -20,6 +20,7 @@ import { FaSearch, FaSun, FaMoon, FaSort, FaSortUp, FaSortDown, FaPlus, FaFilter
 import { API_URL } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./Transactions.css";
+import '../styles/SharedNavbar.css';
 
 function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -79,7 +80,7 @@ function TransactionsPage() {
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/transactions">Transactions</Nav.Link>
+            <Nav.Link href="/transactions" className="active">Transactions</Nav.Link>
             <Nav.Link href="https://expenseandstocks.streamlit.app">Predictions</Nav.Link>
           </Nav>
           

@@ -8,6 +8,7 @@ import styles from './LandingPage.module.css';
 import Navbar from './Navbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/SharedNavbar.css';
 
 function LandingPage() {
   const navigate = useNavigate();

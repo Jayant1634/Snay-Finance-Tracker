@@ -5,6 +5,7 @@ import { FaWallet, FaChartLine, FaLightbulb } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import animationData from '../lottie_animations/landingPage.json';
 import './HomePage.css';
+import '../styles/SharedNavbar.css';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -28,28 +29,32 @@ function HomePage() {
       
 
       {/* Hero Section */}{/* Enhanced Navbar with Logout */}
-      <Navbar expand="lg" className="fixed-top enhanced-navbar">
+      <Navbar expand="lg" className="navbar-custom">
         <Container>
-          <Navbar.Brand href="/home" className="text-white">
+          <Navbar.Brand href="/dashboard">
             SnayExpTracker
           </Navbar.Brand>
+          
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto align-items-center">
-              <Nav.Link href="/home" className="mx-3 text-white">Home</Nav.Link>
-              <Nav.Link href="/dashboard" className="mx-3 text-white">Dashboard</Nav.Link>
-              <Nav.Link href="/transactions" className="mx-3 text-white">Transactions</Nav.Link>
-              <Nav.Link href="https://expenseandstocks.streamlit.app" className="mx-3 text-white">Predictions</Nav.Link>
-              <Dropdown className="ms-3">
-                <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-                  {user.username}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            <Nav className="me-auto">
+              <Nav.Link href="/home" className="active">Home</Nav.Link>
+              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/transactions">Transactions</Nav.Link>
+              <Nav.Link href="https://expenseandstocks.streamlit.app">Predictions</Nav.Link>
             </Nav>
+            
+            <Dropdown>
+              <Dropdown.Toggle className="user-dropdown">
+                {user.username}
+              </Dropdown.Toggle>
+              <Dropdown.Menu align="end">
+                <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>
+                  Logout
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Navbar.Collapse>
         </Container>
       </Navbar>

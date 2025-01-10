@@ -27,6 +27,7 @@ import { FaSun, FaMoon } from "react-icons/fa"; // Import sun and moon icons
 import FinancialGoals from "./FinancialGoals";
 import { API_URL } from "../services/api";
 import "./Dashboard.css";
+import '../styles/SharedNavbar.css';
 
 // Register the required elements
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -199,7 +200,7 @@ function Dashboard() {
     {particles}
 
     {/* Navbar */}
-    <Navbar expand="lg" className="mb-4 fixed-top enhanced-navbar">
+    <Navbar expand="lg" className="navbar-custom">
       <Container>
         <Navbar.Brand href="/dashboard">
           SnayExpTracker
@@ -208,19 +209,18 @@ function Dashboard() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="navbar-nav">
+          <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/dashboard" className="active">Dashboard</Nav.Link>
             <Nav.Link href="/transactions">Transactions</Nav.Link>
             <Nav.Link href="https://expenseandstocks.streamlit.app">Predictions</Nav.Link>
           </Nav>
           
           <Dropdown>
-            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+            <Dropdown.Toggle className="user-dropdown">
               {user.username}
             </Dropdown.Toggle>
-
-            <Dropdown.Menu>
+            <Dropdown.Menu align="end">
               <Dropdown.Item onClick={() => { localStorage.removeItem("user"); navigate("/"); }}>
                 Logout
               </Dropdown.Item>
